@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>horizontal_slide-512.png</file>
+  </qresource>
+</RCC>
