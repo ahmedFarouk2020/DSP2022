@@ -7,8 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from display_imgAndcomp import DisplayImgComp
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(DisplayImgComp):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 500)
@@ -48,11 +49,7 @@ class Ui_MainWindow(object):
         self.Image1ViewerB.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.Image1ViewerB.setObjectName("Image1ViewerB")
         self.gridLayout.addWidget(self.Image1ViewerB, 1, 1, 1, 1)
-        # Display Img 2
-        pixmap_ = QtGui.QPixmap(r'C:\Users\Farouk\Desktop\projects_VsCode\GUI\stinkbug2.png')
-        pixmap_ = pixmap_.scaled(355, 300, QtCore.Qt.KeepAspectRatio)
-        self.Image1ViewerB.setPixmap(pixmap_)
-        #---------------------------------------------------------------
+        
         ##############################################################
         self.gridLayout_5.addWidget(self.Img1GroupBox, 0, 0, 1, 1)
         self.MixerGroupBox = QtWidgets.QGroupBox(self.centralwidget)
@@ -151,6 +148,12 @@ class Ui_MainWindow(object):
         self.Image2ViewerA.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.Image2ViewerA.setObjectName("Image2ViewerA")
         self.gridLayout_3.addWidget(self.Image2ViewerA, 1, 0, 1, 1)
+        # Display Img 2
+        pixmap_img2 = QtGui.QPixmap(r'C:\Users\Farouk\Desktop\projects_VsCode\GUI\stinkbug2.png')
+        pixmap_img2 = pixmap_img2.scaled(355, 300, QtCore.Qt.KeepAspectRatio)
+        self.Image2ViewerA.setPixmap(pixmap_img2)
+        #---------------------------------------------------------------
+        ########################################################
         self.Image2ViewerB = QtWidgets.QLabel(self.Img2Groupbox)
         self.Image2ViewerB.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.Image2ViewerB.setObjectName("Image2ViewerB")
@@ -216,6 +219,9 @@ class Ui_MainWindow(object):
         self.Component2ComboBox2.setItemText(4, _translate("MainWindow", "Uni Magnitude"))
         self.Component2ComboBox2.setItemText(5, _translate("MainWindow", "Uni Phase"))
         self.Img2Groupbox.setTitle(_translate("MainWindow", "Image 2"))
+        ###################################################################
+        # index of img2 combobox start from 4 to 7 to be unique
+        ###################################################################
         self.Image2ComboBox.setItemText(0, _translate("MainWindow", "Magnitude"))
         self.Image2ComboBox.setItemText(1, _translate("MainWindow", "Phase"))
         self.Image2ComboBox.setItemText(2, _translate("MainWindow", "Real"))
@@ -225,8 +231,29 @@ class Ui_MainWindow(object):
         # linking is here 
         # for Image1 and 2 components
         ####################################################
-        self.Image1ComboBox.currentIndexChanged.connect(self.method)
-        self.Image2ComboBox.currentIndexChanged.connect(self.method)
+        self.Image1ComboBox.currentIndexChanged.connect(self.Update_img_component)
+        self.Image2ComboBox.currentIndexChanged.connect(self.Update_img_component)
+
+    def Update_img_component(self, component_indx):
+        pixmap_img1_comp = QtGui.QPixmap(r'C:\Users\Farouk\Desktop\projects_VsCode\GUI\img1comp.png')
+        pixmap_img1_comp = pixmap_img1_comp.scaled(355, 300, QtCore.Qt.KeepAspectRatio)
+
+        if component_indx == 0: # magnitude
+            self.get_img_magnitude()
+            self.Image1ViewerB.setPixmap(pixmap_img1_comp)
+            self.Image1ViewerB.show()
+
+        elif component_indx == 1: # phase
+            pass
+        elif component_indx == 2: # reals
+            self.get_img_reals()
+            self.Image1ViewerB.setPixmap(pixmap_img1_comp)
+            self.Image1ViewerB.show()
+        elif component_indx == 3: # imaginary
+            self.get_img_imgnary()
+            self.Image1ViewerB.setPixmap(pixmap_img1_comp)
+            self.Image1ViewerB.show()
+
 
 
 if __name__ == "__main__":
