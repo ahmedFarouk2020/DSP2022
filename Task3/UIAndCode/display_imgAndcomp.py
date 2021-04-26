@@ -44,7 +44,7 @@ class DisplayImgComp(PromptError):
         magnitude = abs(complex_arr)
         img_arr = ifft2(magnitude)
         img_arr = [abs(x) for x in img_arr]
-        print(img_arr) 
+        #print(img_arr) 
         #max_magnitude = np.amax(magnitude)
         # divid max value in array by all elements in the array ()
         #img_comp_mag = np.true_divide(magnitude,max_magnitude)
@@ -110,5 +110,5 @@ class DisplayImgComp(PromptError):
         imgplot = plt.imshow(lum_img)
         imgplot.set_cmap('hot')
         mpimg.imsave(self.path3,lum_img)
-ob = DisplayImgComp()
-ob.get_img_magnitude()
+# ob = DisplayImgComp()
+# ob.get_img_magnitude()

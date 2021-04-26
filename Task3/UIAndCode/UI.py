@@ -151,7 +151,7 @@ class Ui_MainWindow(DisplayImgComp):
         self.Image2ViewerA.setObjectName("Image2ViewerA")
         self.gridLayout_3.addWidget(self.Image2ViewerA, 1, 0, 1, 1)
         # Display Img 2
-        pixmap_img2 = QtGui.QPixmap(r'C:\Users\Farouk\Desktop\projects_VsCode\GUI\stinkbug2.png')
+        pixmap_img2 = QtGui.QPixmap(self.path2)
         pixmap_img2 = pixmap_img2.scaled(355, 300, QtCore.Qt.KeepAspectRatio)
         self.Image2ViewerA.setPixmap(pixmap_img2)
         #---------------------------------------------------------------
@@ -237,7 +237,7 @@ class Ui_MainWindow(DisplayImgComp):
         self.Image2ComboBox.currentIndexChanged.connect(self.Update_img_component)
 
     def Update_img_component(self, component_indx):
-        pixmap_img1_comp = QtGui.QPixmap(r'C:\Users\Farouk\Desktop\projects_VsCode\GUI\img1comp.png')
+        pixmap_img1_comp = QtGui.QPixmap(self.path3)
         pixmap_img1_comp = pixmap_img1_comp.scaled(355, 300, QtCore.Qt.KeepAspectRatio)
 
         if component_indx == 0: # magnitude
