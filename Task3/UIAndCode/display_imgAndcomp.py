@@ -20,8 +20,12 @@ class PromptError():
 
 class DisplayImgComp(PromptError):
     def __init__(self):
+        # path of img1
         self.path1 = 'C:/Users/Farouk/Desktop/projects_VsCode/GUI/stinkbug1.png'
+        # path of img2
         self.path2 = 'C:/Users/Farouk/Desktop/projects_VsCode/GUI/stinkbug2.png'
+        # path of img1 component
+        self.path3 = 'C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png'
     
 #########################################
     # After creating the omg component, you will pass the path of imgs to UI.py
@@ -38,11 +42,14 @@ class DisplayImgComp(PromptError):
         complex_arr = fft2(self.image_arr)
         # get magnitude of np complex array 
         magnitude = abs(complex_arr)
-        max_magnitude = np.amax(magnitude)
+        img_arr = ifft2(magnitude)
+        img_arr = [abs(x) for x in img_arr]
+        print(img_arr) 
+        #max_magnitude = np.amax(magnitude)
         # divid max value in array by all elements in the array ()
-        img_comp_mag = np.true_divide(magnitude,max_magnitude)
+        #img_comp_mag = np.true_divide(magnitude,max_magnitude)
         #print(img_comp_mag)
-        mpimg.imsave("C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png",img_comp_mag)
+        mpimg.imsave(self.path3,img_arr)
     def get_img_reals(self, img_number=1):
 
         arr_of_paths = [self.path1,self.path2] 
@@ -52,12 +59,16 @@ class DisplayImgComp(PromptError):
         self.image_arr=mpimg.imread(path)
         complex_arr = fft2(self.image_arr)
         reals = [x.real for x in complex_arr]
+        img_arr = ifft2(reals)
+        # remove the imaginary part form final img array
+        img_arr = [x.real for x in img_arr]
+        #print(img_arr)
         #print(reals)
         #png.from_array(reals,mode="L").save("C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png")
         # max_magnitude = np.amax(magnitude)
         # img_comp_mag = np.true_divide(magnitude,max_magnitude)
         # #print(img_comp_mag)
-        mpimg.imsave("C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png",reals)
+        mpimg.imsave(self.path3,img_arr)
 
     def get_img_imgnary(self, img_number=1):
         arr_of_paths = [self.path1,self.path2] 
@@ -67,12 +78,16 @@ class DisplayImgComp(PromptError):
         self.image_arr=mpimg.imread(path)
         complex_arr = fft2(self.image_arr)
         imagnary = [x.imag for x in complex_arr]
+        img_arr = ifft2(imagnary)
+        # get magnitude of array element to remove very small real numbers
+        img_arr = [abs(x) for x in img_arr]
+        #print(img_arr)
         #print(imagnary)
         #png.from_array(reals,mode="L").save("C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png")
         # max_magnitude = np.amax(magnitude)
         # img_comp_mag = np.true_divide(magnitude,max_magnitude)
         # #print(img_comp_mag)
-        mpimg.imsave("C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png",imagnary)
+        mpimg.imsave(self.path3,img_arr)
 
         #print(magnitude)
         # fileHandle = open("img array.txt","w")
@@ -94,6 +109,6 @@ class DisplayImgComp(PromptError):
         lum_img = self.image_arr[:,:,0]
         imgplot = plt.imshow(lum_img)
         imgplot.set_cmap('hot')
-        mpimg.imsave("C:/Users/Farouk/Desktop/projects_VsCode/GUI/stinkbug3.png",lum_img)
+        mpimg.imsave(self.path3,lum_img)
 ob = DisplayImgComp()
-ob.get_img_imgnary()
+ob.get_img_magnitude()

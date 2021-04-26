@@ -10,6 +10,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from display_imgAndcomp import DisplayImgComp
 
 class Ui_MainWindow(DisplayImgComp):
+    def __init__(self):
+        super().__init__()
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 500)
@@ -41,7 +43,7 @@ class Ui_MainWindow(DisplayImgComp):
         self.Image1ViewerA.setObjectName("Image1ViewerA")
         self.gridLayout.addWidget(self.Image1ViewerA, 1, 0, 1, 1)
         # Display Img 1
-        pixmap = QtGui.QPixmap(r'C:\Users\Farouk\Desktop\projects_VsCode\GUI\stinkbug1.png')
+        pixmap = QtGui.QPixmap(self.path1)
         pixmap = pixmap.scaled(355, 300, QtCore.Qt.KeepAspectRatio)
         self.Image1ViewerA.setPixmap(pixmap)
         #---------------------------------------------------------------
