@@ -43,13 +43,12 @@ class DisplayImgComp(PromptError):
         # get arrays of images
         image_arr= self.img_arrays[img_number-1]
         complex_arr = fft2(image_arr)
-        shifted_complex = fftshift(complex_arr)
         #shift the signal to origin
-        shifted_sig = fftshift(shifted_complex)
+        #shifted_complex = fftshift(complex_arr)
 
         # get magnitude of np complex array 
         #magnitude = np.log(np.abs(shifted_sig))
-        magnitude = abs(shifted_sig)
+        magnitude = abs(complex_arr)
         img_arr = ifft2(magnitude)
         img_arr = [x.real for x in img_arr]
         #print(img_arr) 
@@ -66,7 +65,7 @@ class DisplayImgComp(PromptError):
         image_arr= self.img_arrays[img_number-1]
         complex_arr = fft2(image_arr)
         shifted_complex = fftshift(complex_arr)
-        reals = [x.real for x in shifted_complex]
+        reals = [x.real for x in complex_arr]
         img_arr = ifft2(reals)
         # remove the imaginary part form final img array
         img_arr = [x.real for x in img_arr]
@@ -85,7 +84,7 @@ class DisplayImgComp(PromptError):
         image_arr= self.img_arrays[img_number-1]
         complex_arr = fft2(image_arr)
         shifted_complex = fftshift(complex_arr)
-        imagnary = [x.imag for x in shifted_complex]
+        imagnary = [x.imag for x in complex_arr]
         img_arr = ifft2(imagnary)
         # get magnitude of array element to remove very small real numbers
         img_arr = [x.real for x in img_arr]
@@ -105,7 +104,7 @@ class DisplayImgComp(PromptError):
         complex_arr = fft2(image_arr)
         shifted_complex = fftshift(complex_arr)
         # get phase component
-        phase_spectrumA = np.angle(shifted_complex)
+        phase_spectrumA = np.angle(complex_arr)
         #self.save_in_file(phase_spectrumA)
 
         #magnitude_spectrumB = 20*np.log(np.abs(fshift1)) ****************************
