@@ -43,26 +43,6 @@ vector<complex<double>> dft(vector<double> real_input)
 }
 
 
-
-
-/*
-vector<complex<double>> DFT(double in, int k)
-{
-    double a = 0;
-    double b = 0;
-    int N = input.size();
-    for(int k = 0; k < input.size(); k++){
-        for(int n = 0; n < N; n++)
-        {
-            a+= cos((2 * M_PI * k * n) / N) * input[n];
-            b+= -sin((2 * M_PI * k * n) / N) * input[n];
-        }
-        output.push_back(DFT(input[k], k));
-    }
-    complex<double> temp(a, b); // get only on point
-    return temp;
-}
-*/
 int main()
 {
     vector<complex<double>>complex_out = dft({1564.0,4654.0,46.0,64.0,657.0,897198.0,7897.0,98786
