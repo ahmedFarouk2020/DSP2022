@@ -21,13 +21,13 @@ class PromptError():
 class DisplayImgComp(PromptError):
     def __init__(self):
         # path of img1
-        path1 = 'C:/Users/Farouk/Desktop/projects_VsCode/GUI/stinkbug1.png'
+        path1 = 'C:\DSP2022\Task3\الصور اللى هنشتغل عليها\stinkbug1.png'
         # path of img2
-        path2 = 'C:/Users/Farouk/Desktop/projects_VsCode/GUI/stinkbug2.png'
+        path2 = 'C:\DSP2022\Task3\الصور اللى هنشتغل عليها\stinkbug2.png'
         # path of img1 component
-        path3 = 'C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png'
+        path3 = 'C:\DSP2022\Task3\الصور اللى هنشتغل عليها\img1comp.png'
         # path of img1 component
-        path4 = 'C:/Users/Farouk/Desktop/projects_VsCode/GUI/img2comp.png'
+        path4 = 'C:\DSP2022\Task3\الصور اللى هنشتغل عليها\stinkbug.png'
         self.paths = [path1,path2,path3,path4] 
         image_arr1=mpimg.imread(path1)
         image_arr2=mpimg.imread(path2)
