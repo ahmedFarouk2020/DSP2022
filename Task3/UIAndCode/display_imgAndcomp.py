@@ -29,7 +29,10 @@ class DisplayImgComp(PromptError):
         path3 = 'C:\DSP2022\Task3\الصور اللى هنشتغل عليها\img1comp.png'
         # path of img1 component
         path4 = 'C:\DSP2022\Task3\الصور اللى هنشتغل عليها\stinkbug.png'
-        self.paths = [path1,path2,path3,path4] 
+
+        path5 = "dog.jpg"
+        path6 = "cat.jpg"
+        self.paths = [path1,path2,path3,path4,path5,path6] 
         image_arr1=mpimg.imread(path1)
         image_arr2=mpimg.imread(path2)
         self.img_arrays = [image_arr1,image_arr2]

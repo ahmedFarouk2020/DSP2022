@@ -8,6 +8,17 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from display_imgAndcomp import DisplayImgComp
+from Mixer import Mixer
+import Components as components
+import matplotlib.pyplot as plt
+
+class mixingRationSlider(QtWidgets.QSlider) : 
+    def __init__(self) : 
+        super().__init__()
+        self.mouseReleaseMethod = None
+    
+    def mouseReleaseEvent(self,ev) :
+        self.mouseReleaseMethod(ev)
 
 
 class Ui_MainWindow(DisplayImgComp):
@@ -95,7 +106,8 @@ class Ui_MainWindow(DisplayImgComp):
         self.Component1ComboBox1.addItem("")
         self.gridLayout_2.addWidget(self.Component1ComboBox1, 1, 1, 1, 1)
         #################################
-        self.Component1Slider = QtWidgets.QSlider(self.MixerGroupBox)
+        self.Component1Slider = mixingRationSlider()
+        self.Component1Slider.setParent(self.MixerGroupBox)
         self.Component1Slider.setCursor(
             QtGui.QCursor(QtCore.Qt.ClosedHandCursor))
         self.Component1Slider.setMinimum(0)
@@ -142,7 +154,8 @@ class Ui_MainWindow(DisplayImgComp):
         self.Component2ComboBox1.addItem("")
         self.gridLayout_2.addWidget(self.Component2ComboBox1, 3, 1, 1, 1)
         #################################
-        self.Component2Slider = QtWidgets.QSlider(self.MixerGroupBox)
+        self.Component2Slider = mixingRationSlider()
+        self.Component2Slider.setParent(self.MixerGroupBox)
         self.Component2Slider.setCursor(
             QtGui.QCursor(QtCore.Qt.ClosedHandCursor))
         self.Component2Slider.setMinimum(0)
@@ -221,6 +234,7 @@ class Ui_MainWindow(DisplayImgComp):
         self.viewer1 = QtWidgets.QLabel(self.OutputGroupBox)
         self.viewer1.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.viewer1.setObjectName("viewer1")
+        self.viewer1.resize(50,50)
         self.gridLayout_4.addWidget(self.viewer1, 0, 0, 1, 1)
         self.viewer2 = QtWidgets.QLabel(self.OutputGroupBox)
         self.viewer2.setStyleSheet("background-color: rgb(0, 0, 0);")
@@ -235,14 +249,24 @@ class Ui_MainWindow(DisplayImgComp):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
+        # progress bar
+        self.progressBar = QtWidgets.QProgressBar(self.MixerGroupBox)
+        self.progressBar.setMinimum(0)
+        self.progressBar.setMaximum(100)
+        self.progressBar.hide()
+        self.gridLayout_2.addWidget(self.progressBar,5,1,1,3)
+        # window = window.windowType()
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        
         self.Component1Slider.valueChanged.connect(
             lambda: self.valuechange_slider(1))
 
         self.Component2Slider.valueChanged.connect(
             lambda: self.valuechange_slider(2))
+        
+        self.Component1Slider.mouseReleaseMethod = self.sliderValueReleased
+        self.Component2Slider.mouseReleaseMethod = self.sliderValueReleased
 
         self.Component1ComboBox2.currentIndexChanged.connect(
             lambda: self.valuechange_Component1ComboBox2(1))
@@ -271,17 +295,17 @@ class Ui_MainWindow(DisplayImgComp):
         self.Component1ComboBox1.setItemText(
             1, _translate("MainWindow", "Image 2"))
         self.Component1ComboBox2.setItemText(
-            0, _translate("MainWindow", "Magnitude"))
+            0, _translate("MainWindow", components.magnitude))
         self.Component1ComboBox2.setItemText(1,
-                                             _translate("MainWindow", "Phase"))
+                                             _translate("MainWindow", components.phase))
         self.Component1ComboBox2.setItemText(2,
-                                             _translate("MainWindow", "Real"))
+                                             _translate("MainWindow", components.real))
         self.Component1ComboBox2.setItemText(
-            3, _translate("MainWindow", "Imaginary"))
+            3, _translate("MainWindow", components.imaginary))
         self.Component1ComboBox2.setItemText(
-            4, _translate("MainWindow", "Uni Magnitude"))
+            4, _translate("MainWindow", components.uniform_magnitude))
         self.Component1ComboBox2.setItemText(
-            5, _translate("MainWindow", "Uni Phase"))
+            5, _translate("MainWindow", components.uniform_phase))
         #####################################################
 
         ########################################################
@@ -291,17 +315,17 @@ class Ui_MainWindow(DisplayImgComp):
         self.Component2ComboBox1.setItemText(
             1, _translate("MainWindow", "Image 2"))
         self.Component2ComboBox2.setItemText(
-            0, _translate("MainWindow", "Magnitude"))
+            0, _translate("MainWindow", components.magnitude))
         self.Component2ComboBox2.setItemText(1,
-                                             _translate("MainWindow", "Phase"))
+                                             _translate("MainWindow", components.phase))
         self.Component2ComboBox2.setItemText(2,
-                                             _translate("MainWindow", "Real"))
+                                             _translate("MainWindow", components.real))
         self.Component2ComboBox2.setItemText(
-            3, _translate("MainWindow", "Imaginary"))
+            3, _translate("MainWindow", components.imaginary))
         self.Component2ComboBox2.setItemText(
-            4, _translate("MainWindow", "Uni Magnitude"))
+            4, _translate("MainWindow", components.uniform_magnitude))
         self.Component2ComboBox2.setItemText(
-            5, _translate("MainWindow", "Uni Phase"))
+            5, _translate("MainWindow", components.uniform_phase))
         #########################
 
         self.Component1SliderEnd.setText(_translate("MainWindow", "0%"))
@@ -327,6 +351,9 @@ class Ui_MainWindow(DisplayImgComp):
             self.Update_img1Component)
         self.Image2ComboBox.currentIndexChanged.connect(
             self.Update_img2Component)
+        #####################################################
+        self.Component2ComboBox1.setCurrentIndex(1)
+        self.Component2ComboBox2.setCurrentIndex(1)
 
     def Update_img1Component(self, component_indx):
         self.Update_img_componentV2(component_indx, "img1")
@@ -394,35 +421,55 @@ class Ui_MainWindow(DisplayImgComp):
             slider2value = self.Component2Slider.value()
             self.Component2SliderEnd.setText((f"{slider2value}%"))
 
+    def sliderValueReleased(self,ev) : 
+        self.mix()
+
     def valuechange_Component1ComboBox2(self, num_combox):
         if num_combox == 1:
-            if str(self.Component1ComboBox2.currentText()) == "Phase":
-                index = self.Component2ComboBox2.findText("Magnitude")
-                self.Component2ComboBox2.setCurrentIndex(index)
-            elif str(self.Component1ComboBox2.currentText()) == "Magnitude":
-                index2 = self.Component2ComboBox2.findText("Phase")
-                self.Component2ComboBox2.setCurrentIndex(index2)
-            elif str(self.Component1ComboBox2.currentText()) == "Imaginary":
-                index3 = self.Component2ComboBox2.findText("Real")
-                self.Component2ComboBox2.setCurrentIndex(index3)
-            elif str(self.Component1ComboBox2.currentText()) == "Real":
-                index4 = self.Component2ComboBox2.findText("Imaginary")
-                self.Component2ComboBox2.setCurrentIndex(index4)
+            self.Component2ComboBox2.setCurrentText(components.opposite(self.Component1ComboBox2.currentText()))
         else:
-            if str(self.Component2ComboBox2.currentText()) == "Phase":
-                index = self.Component1ComboBox2.findText("Magnitude")
-                self.Component1ComboBox2.setCurrentIndex(index)
-            elif str(self.Component2ComboBox2.currentText()) == "Magnitude":
-                index2 = self.Component1ComboBox2.findText("Phase")
-                self.Component1ComboBox2.setCurrentIndex(index2)
-            elif str(self.Component2ComboBox2.currentText()) == "Imaginary":
-                index3 = self.Component1ComboBox2.findText("Real")
-                self.Component1ComboBox2.setCurrentIndex(index3)
-            elif str(self.Component2ComboBox2.currentText()) == "Real":
-                index4 = self.Component1ComboBox2.findText("Imaginary")
-                self.Component1ComboBox2.setCurrentIndex(index4)
-
-
+            self.Component1ComboBox2.setCurrentText(components.opposite(self.Component2ComboBox2.currentText()))
+        self.mix()
+    def mix(self) : 
+        # prgress bar setup
+        self.progressBar.setValue(0)
+        self.progressBar.show()
+        imgage_1 = None
+        imgage_2 = None
+        # get images 
+        if self.Component1ComboBox1.currentText() == "Image 1" : 
+            imgage_1 = DisplayImgComp().paths[4]
+        if self.Component1ComboBox1.currentText() == "Image 2" : 
+            imgage_1 = DisplayImgComp().paths[5]
+        if self.Component2ComboBox1.currentText() == "Image 1" :
+            imgage_2 = DisplayImgComp().paths[4]
+        if self.Component2ComboBox1.currentText() == "Image 2" :
+            imgage_2 = DisplayImgComp().paths[5]
+        #get components 
+        component_1 = self.Component1ComboBox2.currentText()
+        component_2 = self.Component2ComboBox2.currentText()
+        # get mixing ration 
+        mixingRatio_1 = int(self.Component1Slider.value())
+        mixingRatio_2 = int(self.Component2Slider.value())
+        # get output viewer
+        if self.OutputCombobox.currentText() == "Output 1" :
+            viewer = self.viewer1
+        else :
+            viewer = self.viewer2
+        mixer = Mixer(imgage_1,imgage_2)
+        mixer.start()
+        mixer.signal.connect(self.updateProgressBar)
+        data_after_Mixing = mixer.mix_with_the_opposite(component_1,mixingRatio_1,component_2,mixingRatio_2)
+        plt.imshow(data_after_Mixing)
+        plt.axis('off')
+        plt.savefig("Output.png",bbox_inches='tight')
+        output_image = QtGui.QPixmap("Output.png")
+        viewer.setPixmap(output_image.scaled(viewer.width(),viewer.height(),QtCore.Qt.IgnoreAspectRatio))
+        # hide progress bar
+        self.progressBar.hide()
+    def updateProgressBar(self,count) : 
+        self.progressBar.setValue(count)
+        # print(str(count) + " %")
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
