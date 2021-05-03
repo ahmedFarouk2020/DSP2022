@@ -1,0 +1,1189 @@
+	.file	"FFT.cpp"
+	.text
+	.section	.text$_ZnwyPv,"x"
+	.linkonce discard
+	.globl	_ZnwyPv
+	.def	_ZnwyPv;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZnwyPv
+_ZnwyPv:
+.LFB83:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	24(%rbp), %rax
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section .rdata,"dr"
+_ZStL19piecewise_construct:
+	.space 1
+.lcomm _ZStL8__ioinit,1,1
+	.section	.text$_ZSt25__valarray_release_memoryPv,"x"
+	.linkonce discard
+	.globl	_ZSt25__valarray_release_memoryPv
+	.def	_ZSt25__valarray_release_memoryPv;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZSt25__valarray_release_memoryPv
+_ZSt25__valarray_release_memoryPv:
+.LFB2263:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	16(%rbp), %rcx
+	call	_ZdlPv
+	nop
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt5sliceC1Eyyy,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt5sliceC1Eyyy
+	.def	_ZNSt5sliceC1Eyyy;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt5sliceC1Eyyy
+_ZNSt5sliceC1Eyyy:
+.LFB2443:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	%r8, 32(%rbp)
+	movq	%r9, 40(%rbp)
+	movq	16(%rbp), %rax
+	movq	24(%rbp), %rdx
+	movq	%rdx, (%rax)
+	movq	16(%rbp), %rax
+	movq	32(%rbp), %rdx
+	movq	%rdx, 8(%rax)
+	movq	16(%rbp), %rax
+	movq	40(%rbp), %rdx
+	movq	%rdx, 16(%rax)
+	nop
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNKSt5slice5startEv,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNKSt5slice5startEv
+	.def	_ZNKSt5slice5startEv;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNKSt5slice5startEv
+_ZNKSt5slice5startEv:
+.LFB2444:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNKSt5slice4sizeEv,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNKSt5slice4sizeEv
+	.def	_ZNKSt5slice4sizeEv;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNKSt5slice4sizeEv
+_ZNKSt5slice4sizeEv:
+.LFB2445:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNKSt5slice6strideEv,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNKSt5slice6strideEv
+	.def	_ZNKSt5slice6strideEv;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNKSt5slice6strideEv
+_ZNKSt5slice6strideEv:
+.LFB2446:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	16(%rbp), %rax
+	movq	16(%rax), %rax
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt7complexIdEC1Edd,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt7complexIdEC1Edd
+	.def	_ZNSt7complexIdEC1Edd;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt7complexIdEC1Edd
+_ZNSt7complexIdEC1Edd:
+.LFB3143:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movsd	%xmm1, 24(%rbp)
+	movsd	%xmm2, 32(%rbp)
+	movsd	24(%rbp), %xmm1
+	movsd	32(%rbp), %xmm0
+	movq	16(%rbp), %rax
+	movsd	%xmm1, (%rax)
+	movsd	%xmm0, 8(%rax)
+	nop
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNKSt7complexIdE5__repEv,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNKSt7complexIdE5__repEv
+	.def	_ZNKSt7complexIdE5__repEv;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNKSt7complexIdE5__repEv
+_ZNKSt7complexIdE5__repEv:
+.LFB3161:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	24(%rbp), %rax
+	movsd	(%rax), %xmm1
+	movsd	8(%rax), %xmm0
+	movq	16(%rbp), %rax
+	movsd	%xmm1, (%rax)
+	movsd	%xmm0, 8(%rax)
+	movq	16(%rbp), %rax
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section .rdata,"dr"
+	.align 8
+_ZL2PI:
+	.long	1413754602
+	.long	1074340347
+	.text
+	.globl	_Z3FFTRSt8valarrayISt7complexIdEE
+	.def	_Z3FFTRSt8valarrayISt7complexIdEE;	.scl	2;	.type	32;	.endef
+	.seh_proc	_Z3FFTRSt8valarrayISt7complexIdEE
+_Z3FFTRSt8valarrayISt7complexIdEE:
+.LFB3249:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	pushq	%rsi
+	.seh_pushreg	%rsi
+	pushq	%rbx
+	.seh_pushreg	%rbx
+	subq	$304, %rsp
+	.seh_stackalloc	304
+	leaq	128(%rsp), %rbp
+	.seh_setframe	%rbp, 128
+	.seh_endprologue
+	movq	%rcx, 208(%rbp)
+	movq	208(%rbp), %rcx
+	call	_ZNKSt8valarrayISt7complexIdEE4sizeEv
+	movq	%rax, 160(%rbp)
+	cmpq	$1, 160(%rbp)
+	jbe	.L30
+	movq	160(%rbp), %rax
+	shrq	%rax
+	movq	%rax, %rdx
+	leaq	32(%rbp), %rax
+	movl	$2, %r9d
+	movq	%rdx, %r8
+	movl	$0, %edx
+	movq	%rax, %rcx
+	call	_ZNSt5sliceC1Eyyy
+	movq	%rbp, %rcx
+	movq	32(%rbp), %rax
+	movq	40(%rbp), %rdx
+	movq	%rax, -80(%rbp)
+	movq	%rdx, -72(%rbp)
+	movq	48(%rbp), %rax
+	movq	%rax, -64(%rbp)
+	leaq	-80(%rbp), %rax
+	movq	%rax, %r8
+	movq	208(%rbp), %rdx
+.LEHB0:
+	call	_ZNSt8valarrayISt7complexIdEEixESt5slice
+	movq	%rbp, %rdx
+	leaq	-16(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt8valarrayISt7complexIdEEC1ERKSt11slice_arrayIS1_E
+.LEHE0:
+	movq	160(%rbp), %rax
+	shrq	%rax
+	movq	%rax, %rdx
+	leaq	96(%rbp), %rax
+	movl	$2, %r9d
+	movq	%rdx, %r8
+	movl	$1, %edx
+	movq	%rax, %rcx
+	call	_ZNSt5sliceC1Eyyy
+	leaq	64(%rbp), %rcx
+	movq	96(%rbp), %rax
+	movq	104(%rbp), %rdx
+	movq	%rax, -80(%rbp)
+	movq	%rdx, -72(%rbp)
+	movq	112(%rbp), %rax
+	movq	%rax, -64(%rbp)
+	leaq	-80(%rbp), %rax
+	movq	%rax, %r8
+	movq	208(%rbp), %rdx
+.LEHB1:
+	call	_ZNSt8valarrayISt7complexIdEEixESt5slice
+	leaq	64(%rbp), %rdx
+	leaq	-32(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt8valarrayISt7complexIdEEC1ERKSt11slice_arrayIS1_E
+.LEHE1:
+	leaq	-16(%rbp), %rax
+	movq	%rax, %rcx
+.LEHB2:
+	call	_Z3FFTRSt8valarrayISt7complexIdEE
+	leaq	-32(%rbp), %rax
+	movq	%rax, %rcx
+	call	_Z3FFTRSt8valarrayISt7complexIdEE
+	movq	$0, 168(%rbp)
+.L22:
+	movq	160(%rbp), %rax
+	shrq	%rax
+	cmpq	%rax, 168(%rbp)
+	jnb	.L17
+	movq	168(%rbp), %rdx
+	leaq	-32(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt8valarrayISt7complexIdEEixEy
+	movq	%rax, %rbx
+	movq	168(%rbp), %rax
+	testq	%rax, %rax
+	js	.L18
+	cvtsi2sdq	%rax, %xmm0
+	jmp	.L19
+.L18:
+	movq	%rax, %rdx
+	shrq	%rdx
+	andl	$1, %eax
+	orq	%rax, %rdx
+	cvtsi2sdq	%rdx, %xmm0
+	addsd	%xmm0, %xmm0
+.L19:
+	movsd	.LC0(%rip), %xmm1
+	mulsd	%xmm0, %xmm1
+	movq	160(%rbp), %rax
+	testq	%rax, %rax
+	js	.L20
+	cvtsi2sdq	%rax, %xmm0
+	jmp	.L21
+.L20:
+	movq	%rax, %rdx
+	shrq	%rdx
+	andl	$1, %eax
+	orq	%rax, %rdx
+	cvtsi2sdq	%rdx, %xmm0
+	addsd	%xmm0, %xmm0
+.L21:
+	divsd	%xmm0, %xmm1
+	movapd	%xmm1, %xmm0
+	movsd	%xmm0, 144(%rbp)
+	movsd	.LC1(%rip), %xmm0
+	movsd	%xmm0, 152(%rbp)
+	leaq	128(%rbp), %rax
+	leaq	144(%rbp), %rcx
+	leaq	152(%rbp), %rdx
+	movq	%rcx, %r8
+	movq	%rax, %rcx
+	call	_ZSt5polarIdESt7complexIT_ERKS1_S4_
+	leaq	-48(%rbp), %rax
+	leaq	128(%rbp), %rdx
+	movq	%rbx, %r8
+	movq	%rax, %rcx
+	call	_ZStmlIdESt7complexIT_ERKS2_S4_
+	movq	168(%rbp), %rdx
+	leaq	-16(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt8valarrayISt7complexIdEEixEy
+	movq	%rax, %rsi
+	movq	168(%rbp), %rax
+	movq	%rax, %rdx
+	movq	208(%rbp), %rcx
+	call	_ZNSt8valarrayISt7complexIdEEixEy
+	movq	%rax, %rbx
+	leaq	-96(%rbp), %rax
+	leaq	-48(%rbp), %rdx
+	movq	%rdx, %r8
+	movq	%rsi, %rdx
+	movq	%rax, %rcx
+	call	_ZStplIdESt7complexIT_ERKS2_S4_
+	movsd	-96(%rbp), %xmm0
+	movsd	%xmm0, (%rbx)
+	movsd	-88(%rbp), %xmm0
+	movsd	%xmm0, 8(%rbx)
+	movq	168(%rbp), %rdx
+	leaq	-16(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt8valarrayISt7complexIdEEixEy
+	movq	%rax, %rsi
+	movq	160(%rbp), %rax
+	shrq	%rax
+	movq	%rax, %rdx
+	movq	168(%rbp), %rax
+	addq	%rdx, %rax
+	movq	%rax, %rdx
+	movq	208(%rbp), %rcx
+	call	_ZNSt8valarrayISt7complexIdEEixEy
+	movq	%rax, %rbx
+	leaq	-96(%rbp), %rax
+	leaq	-48(%rbp), %rdx
+	movq	%rdx, %r8
+	movq	%rsi, %rdx
+	movq	%rax, %rcx
+	call	_ZStmiIdESt7complexIT_ERKS2_S4_
+.LEHE2:
+	movsd	-96(%rbp), %xmm0
+	movsd	%xmm0, (%rbx)
+	movsd	-88(%rbp), %xmm0
+	movsd	%xmm0, 8(%rbx)
+	incq	168(%rbp)
+	jmp	.L22
+.L17:
+	leaq	-32(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt8valarrayISt7complexIdEED1Ev
+	leaq	-16(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt8valarrayISt7complexIdEED1Ev
+	jmp	.L14
+.L27:
+	movq	%rax, %rcx
+.LEHB3:
+	call	_Unwind_Resume
+.L28:
+	movq	%rax, %rbx
+	jmp	.L25
+.L29:
+	movq	%rax, %rbx
+	leaq	-32(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt8valarrayISt7complexIdEED1Ev
+.L25:
+	leaq	-16(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt8valarrayISt7complexIdEED1Ev
+	movq	%rbx, %rax
+	movq	%rax, %rcx
+	call	_Unwind_Resume
+.LEHE3:
+.L30:
+	nop
+.L14:
+	addq	$304, %rsp
+	popq	%rbx
+	popq	%rsi
+	popq	%rbp
+	ret
+	.def	__gxx_personality_seh0;	.scl	2;	.type	32;	.endef
+	.seh_handler	__gxx_personality_seh0, @unwind, @except
+	.seh_handlerdata
+.LLSDA3249:
+	.byte	0xff
+	.byte	0xff
+	.byte	0x1
+	.uleb128 .LLSDACSE3249-.LLSDACSB3249
+.LLSDACSB3249:
+	.uleb128 .LEHB0-.LFB3249
+	.uleb128 .LEHE0-.LEHB0
+	.uleb128 .L27-.LFB3249
+	.uleb128 0
+	.uleb128 .LEHB1-.LFB3249
+	.uleb128 .LEHE1-.LEHB1
+	.uleb128 .L28-.LFB3249
+	.uleb128 0
+	.uleb128 .LEHB2-.LFB3249
+	.uleb128 .LEHE2-.LEHB2
+	.uleb128 .L29-.LFB3249
+	.uleb128 0
+	.uleb128 .LEHB3-.LFB3249
+	.uleb128 .LEHE3-.LEHB3
+	.uleb128 0
+	.uleb128 0
+.LLSDACSE3249:
+	.text
+	.seh_endproc
+	.section	.text$_ZNKSt8valarrayISt7complexIdEE4sizeEv,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNKSt8valarrayISt7complexIdEE4sizeEv
+	.def	_ZNKSt8valarrayISt7complexIdEE4sizeEv;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNKSt8valarrayISt7complexIdEE4sizeEv
+_ZNKSt8valarrayISt7complexIdEE4sizeEv:
+.LFB3498:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt8valarrayISt7complexIdEEixESt5slice,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt8valarrayISt7complexIdEEixESt5slice
+	.def	_ZNSt8valarrayISt7complexIdEEixESt5slice;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt8valarrayISt7complexIdEEixESt5slice
+_ZNSt8valarrayISt7complexIdEEixESt5slice:
+.LFB3499:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	pushq	%rbx
+	.seh_pushreg	%rbx
+	subq	$56, %rsp
+	.seh_stackalloc	56
+	leaq	128(%rsp), %rbp
+	.seh_setframe	%rbp, 128
+	.seh_endprologue
+	movq	%rcx, -48(%rbp)
+	movq	%rdx, -40(%rbp)
+	movq	%r8, %rbx
+	movq	-40(%rbp), %rax
+	movq	8(%rax), %rdx
+	leaq	-88(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt6_ArrayISt7complexIdEEC1EPS1_
+	movq	-88(%rbp), %rax
+	movq	%rbx, %r8
+	movq	%rax, %rdx
+	movq	-48(%rbp), %rcx
+	call	_ZNSt11slice_arrayISt7complexIdEEC1ESt6_ArrayIS1_ERKSt5slice
+	movq	-48(%rbp), %rax
+	addq	$56, %rsp
+	popq	%rbx
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt8valarrayISt7complexIdEEC1ERKSt11slice_arrayIS1_E,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt8valarrayISt7complexIdEEC1ERKSt11slice_arrayIS1_E
+	.def	_ZNSt8valarrayISt7complexIdEEC1ERKSt11slice_arrayIS1_E;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt8valarrayISt7complexIdEEC1ERKSt11slice_arrayIS1_E
+_ZNSt8valarrayISt7complexIdEEC1ERKSt11slice_arrayIS1_E:
+.LFB3502:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	24(%rbp), %rax
+	movq	(%rax), %rdx
+	movq	16(%rbp), %rax
+	movq	%rdx, (%rax)
+	movq	24(%rbp), %rax
+	movq	(%rax), %rax
+	movq	%rax, %rcx
+	call	_ZSt22__valarray_get_storageISt7complexIdEEPT_y
+	movq	%rax, %rdx
+	movq	16(%rbp), %rax
+	movq	%rdx, 8(%rax)
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rdx
+	leaq	-8(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNSt6_ArrayISt7complexIdEEC1EPS1_
+	movq	24(%rbp), %rax
+	movq	8(%rax), %rcx
+	movq	24(%rbp), %rax
+	movq	(%rax), %rdx
+	movq	-8(%rbp), %r8
+	movq	24(%rbp), %rax
+	movq	16(%rax), %rax
+	movq	%r8, %r9
+	movq	%rcx, %r8
+	movq	%rax, %rcx
+	call	_ZSt25__valarray_copy_constructISt7complexIdEEvSt6_ArrayIT_EyyS4_
+	nop
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt8valarrayISt7complexIdEED1Ev,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt8valarrayISt7complexIdEED1Ev
+	.def	_ZNSt8valarrayISt7complexIdEED1Ev;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt8valarrayISt7complexIdEED1Ev
+_ZNSt8valarrayISt7complexIdEED1Ev:
+.LFB3505:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rdx
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	salq	$4, %rax
+	addq	%rax, %rdx
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, %rcx
+	call	_ZSt27__valarray_destroy_elementsISt7complexIdEEvPT_S3_
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, %rcx
+	call	_ZSt25__valarray_release_memoryPv
+	nop
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZSt5polarIdESt7complexIT_ERKS1_S4_,"x"
+	.linkonce discard
+	.globl	_ZSt5polarIdESt7complexIT_ERKS1_S4_
+	.def	_ZSt5polarIdESt7complexIT_ERKS1_S4_;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZSt5polarIdESt7complexIT_ERKS1_S4_
+_ZSt5polarIdESt7complexIT_ERKS1_S4_:
+.LFB3509:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$64, %rsp
+	.seh_stackalloc	64
+	movaps	%xmm6, -32(%rbp)
+	.seh_savexmm	%xmm6, 32
+	movaps	%xmm7, -16(%rbp)
+	.seh_savexmm	%xmm7, 48
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	%r8, 32(%rbp)
+	movq	24(%rbp), %rax
+	movsd	(%rax), %xmm6
+	movq	32(%rbp), %rax
+	movq	(%rax), %rax
+	movq	%rax, %xmm0
+	call	sin
+	movapd	%xmm6, %xmm7
+	mulsd	%xmm0, %xmm7
+	movq	24(%rbp), %rax
+	movsd	(%rax), %xmm6
+	movq	32(%rbp), %rax
+	movq	(%rax), %rax
+	movq	%rax, %xmm0
+	call	cos
+	mulsd	%xmm6, %xmm0
+	movapd	%xmm7, %xmm2
+	movapd	%xmm0, %xmm1
+	movq	16(%rbp), %rcx
+	call	_ZNSt7complexIdEC1Edd
+	movq	16(%rbp), %rax
+	movaps	-32(%rbp), %xmm6
+	movaps	-16(%rbp), %xmm7
+	addq	$64, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt8valarrayISt7complexIdEEixEy,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt8valarrayISt7complexIdEEixEy
+	.def	_ZNSt8valarrayISt7complexIdEEixEy;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt8valarrayISt7complexIdEEixEy
+_ZNSt8valarrayISt7complexIdEEixEy:
+.LFB3510:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rdx
+	movq	24(%rbp), %rax
+	salq	$4, %rax
+	addq	%rdx, %rax
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZStmlIdESt7complexIT_ERKS2_S4_,"x"
+	.linkonce discard
+	.globl	_ZStmlIdESt7complexIT_ERKS2_S4_
+	.def	_ZStmlIdESt7complexIT_ERKS2_S4_;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZStmlIdESt7complexIT_ERKS2_S4_
+_ZStmlIdESt7complexIT_ERKS2_S4_:
+.LFB3511:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	%r8, 32(%rbp)
+	movq	16(%rbp), %rax
+	movq	24(%rbp), %rdx
+	movsd	(%rdx), %xmm0
+	movsd	%xmm0, (%rax)
+	movsd	8(%rdx), %xmm0
+	movsd	%xmm0, 8(%rax)
+	movq	32(%rbp), %rax
+	movq	%rax, %rdx
+	movq	16(%rbp), %rcx
+	call	_ZNSt7complexIdEmLIdEERS0_RKS_IT_E
+	nop
+	movq	16(%rbp), %rax
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZStplIdESt7complexIT_ERKS2_S4_,"x"
+	.linkonce discard
+	.globl	_ZStplIdESt7complexIT_ERKS2_S4_
+	.def	_ZStplIdESt7complexIT_ERKS2_S4_;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZStplIdESt7complexIT_ERKS2_S4_
+_ZStplIdESt7complexIT_ERKS2_S4_:
+.LFB3512:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	%r8, 32(%rbp)
+	movq	16(%rbp), %rax
+	movq	24(%rbp), %rdx
+	movsd	(%rdx), %xmm0
+	movsd	%xmm0, (%rax)
+	movsd	8(%rdx), %xmm0
+	movsd	%xmm0, 8(%rax)
+	movq	32(%rbp), %rax
+	movq	%rax, %rdx
+	movq	16(%rbp), %rcx
+	call	_ZNSt7complexIdEpLIdEERS0_RKS_IT_E
+	nop
+	movq	16(%rbp), %rax
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZStmiIdESt7complexIT_ERKS2_S4_,"x"
+	.linkonce discard
+	.globl	_ZStmiIdESt7complexIT_ERKS2_S4_
+	.def	_ZStmiIdESt7complexIT_ERKS2_S4_;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZStmiIdESt7complexIT_ERKS2_S4_
+_ZStmiIdESt7complexIT_ERKS2_S4_:
+.LFB3513:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	%r8, 32(%rbp)
+	movq	16(%rbp), %rax
+	movq	24(%rbp), %rdx
+	movsd	(%rdx), %xmm0
+	movsd	%xmm0, (%rax)
+	movsd	8(%rdx), %xmm0
+	movsd	%xmm0, 8(%rax)
+	movq	32(%rbp), %rax
+	movq	%rax, %rdx
+	movq	16(%rbp), %rcx
+	call	_ZNSt7complexIdEmIIdEERS0_RKS_IT_E
+	nop
+	movq	16(%rbp), %rax
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt6_ArrayISt7complexIdEEC1EPS1_,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt6_ArrayISt7complexIdEEC1EPS1_
+	.def	_ZNSt6_ArrayISt7complexIdEEC1EPS1_;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt6_ArrayISt7complexIdEEC1EPS1_
+_ZNSt6_ArrayISt7complexIdEEC1EPS1_:
+.LFB3627:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	16(%rbp), %rax
+	movq	24(%rbp), %rdx
+	movq	%rdx, (%rax)
+	nop
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt11slice_arrayISt7complexIdEEC1ESt6_ArrayIS1_ERKSt5slice,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt11slice_arrayISt7complexIdEEC1ESt6_ArrayIS1_ERKSt5slice
+	.def	_ZNSt11slice_arrayISt7complexIdEEC1ESt6_ArrayIS1_ERKSt5slice;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt11slice_arrayISt7complexIdEEC1ESt6_ArrayIS1_ERKSt5slice
+_ZNSt11slice_arrayISt7complexIdEEC1ESt6_ArrayIS1_ERKSt5slice:
+.LFB3630:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	pushq	%rsi
+	.seh_pushreg	%rsi
+	pushq	%rbx
+	.seh_pushreg	%rbx
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 32(%rbp)
+	movq	%rdx, 40(%rbp)
+	movq	%r8, 48(%rbp)
+	movq	48(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNKSt5slice4sizeEv
+	movq	32(%rbp), %rdx
+	movq	%rax, (%rdx)
+	movq	48(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNKSt5slice6strideEv
+	movq	32(%rbp), %rdx
+	movq	%rax, 8(%rdx)
+	movq	32(%rbp), %rax
+	leaq	16(%rax), %rbx
+	leaq	40(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNKSt6_ArrayISt7complexIdEE5beginEv
+	movq	%rax, %rsi
+	movq	48(%rbp), %rax
+	movq	%rax, %rcx
+	call	_ZNKSt5slice5startEv
+	salq	$4, %rax
+	addq	%rsi, %rax
+	movq	%rax, %rdx
+	movq	%rbx, %rcx
+	call	_ZNSt6_ArrayISt7complexIdEEC1EPS1_
+	nop
+	addq	$32, %rsp
+	popq	%rbx
+	popq	%rsi
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZSt22__valarray_get_storageISt7complexIdEEPT_y,"x"
+	.linkonce discard
+	.globl	_ZSt22__valarray_get_storageISt7complexIdEEPT_y
+	.def	_ZSt22__valarray_get_storageISt7complexIdEEPT_y;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZSt22__valarray_get_storageISt7complexIdEEPT_y
+_ZSt22__valarray_get_storageISt7complexIdEEPT_y:
+.LFB3634:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	16(%rbp), %rax
+	salq	$4, %rax
+	movq	%rax, %rcx
+	call	_Znwy
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZSt25__valarray_copy_constructISt7complexIdEEvSt6_ArrayIT_EyyS4_,"x"
+	.linkonce discard
+	.globl	_ZSt25__valarray_copy_constructISt7complexIdEEvSt6_ArrayIT_EyyS4_
+	.def	_ZSt25__valarray_copy_constructISt7complexIdEEvSt6_ArrayIT_EyyS4_;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZSt25__valarray_copy_constructISt7complexIdEEvSt6_ArrayIT_EyyS4_
+_ZSt25__valarray_copy_constructISt7complexIdEEvSt6_ArrayIT_EyyS4_:
+.LFB3635:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	%r8, 32(%rbp)
+	movq	%r9, 40(%rbp)
+	movq	40(%rbp), %r8
+	movq	16(%rbp), %rax
+	movq	32(%rbp), %rcx
+	movq	24(%rbp), %rdx
+	movq	%r8, %r9
+	movq	%rcx, %r8
+	movq	%rax, %rcx
+	call	_ZSt25__valarray_copy_constructISt7complexIdEEvPKT_yyPS2_
+	nop
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZSt27__valarray_destroy_elementsISt7complexIdEEvPT_S3_,"x"
+	.linkonce discard
+	.globl	_ZSt27__valarray_destroy_elementsISt7complexIdEEvPT_S3_
+	.def	_ZSt27__valarray_destroy_elementsISt7complexIdEEvPT_S3_;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZSt27__valarray_destroy_elementsISt7complexIdEEvPT_S3_
+_ZSt27__valarray_destroy_elementsISt7complexIdEEvPT_S3_:
+.LFB3636:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+.L54:
+	movq	16(%rbp), %rax
+	cmpq	24(%rbp), %rax
+	je	.L55
+	addq	$16, 16(%rbp)
+	jmp	.L54
+.L55:
+	nop
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt7complexIdEmLIdEERS0_RKS_IT_E,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt7complexIdEmLIdEERS0_RKS_IT_E
+	.def	_ZNSt7complexIdEmLIdEERS0_RKS_IT_E;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt7complexIdEmLIdEERS0_RKS_IT_E
+_ZNSt7complexIdEmLIdEERS0_RKS_IT_E:
+.LFB3637:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$96, %rsp
+	.seh_stackalloc	96
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	leaq	-48(%rbp), %rax
+	movq	24(%rbp), %rdx
+	movq	%rax, %rcx
+	call	_ZNKSt7complexIdE5__repEv
+	movsd	-48(%rbp), %xmm0
+	movsd	%xmm0, -16(%rbp)
+	movsd	-40(%rbp), %xmm0
+	movsd	%xmm0, -8(%rbp)
+	movsd	-16(%rbp), %xmm0
+	movsd	%xmm0, -24(%rbp)
+	movsd	-8(%rbp), %xmm0
+	movsd	%xmm0, -32(%rbp)
+	movq	16(%rbp), %rax
+	movsd	(%rax), %xmm3
+	movq	16(%rbp), %rax
+	movsd	8(%rax), %xmm0
+	leaq	-48(%rbp), %rax
+	movsd	-32(%rbp), %xmm2
+	movsd	-24(%rbp), %xmm1
+	movsd	%xmm0, 32(%rsp)
+	movq	%rax, %rcx
+	call	__muldc3
+	movsd	-48(%rbp), %xmm1
+	movsd	-40(%rbp), %xmm0
+	movq	16(%rbp), %rax
+	movsd	%xmm1, (%rax)
+	movq	16(%rbp), %rax
+	movsd	%xmm0, 8(%rax)
+	movq	16(%rbp), %rax
+	addq	$96, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt7complexIdEpLIdEERS0_RKS_IT_E,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt7complexIdEpLIdEERS0_RKS_IT_E
+	.def	_ZNSt7complexIdEpLIdEERS0_RKS_IT_E;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt7complexIdEpLIdEERS0_RKS_IT_E
+_ZNSt7complexIdEpLIdEERS0_RKS_IT_E:
+.LFB3638:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	leaq	-16(%rbp), %rax
+	movq	24(%rbp), %rdx
+	movq	%rax, %rcx
+	call	_ZNKSt7complexIdE5__repEv
+	movsd	-16(%rbp), %xmm1
+	movsd	-8(%rbp), %xmm0
+	movq	%xmm1, %rdx
+	movq	%xmm0, %rax
+	movq	%rdx, %rcx
+	movq	%rax, %rdx
+	movq	16(%rbp), %rax
+	movsd	(%rax), %xmm1
+	movq	16(%rbp), %rax
+	movsd	8(%rax), %xmm0
+	movq	%rcx, %xmm3
+	movq	%rdx, %xmm2
+	addsd	%xmm3, %xmm1
+	addsd	%xmm2, %xmm0
+	movq	16(%rbp), %rax
+	movsd	%xmm1, (%rax)
+	movq	16(%rbp), %rax
+	movsd	%xmm0, 8(%rax)
+	movq	16(%rbp), %rax
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNSt7complexIdEmIIdEERS0_RKS_IT_E,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNSt7complexIdEmIIdEERS0_RKS_IT_E
+	.def	_ZNSt7complexIdEmIIdEERS0_RKS_IT_E;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNSt7complexIdEmIIdEERS0_RKS_IT_E
+_ZNSt7complexIdEmIIdEERS0_RKS_IT_E:
+.LFB3639:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	leaq	-16(%rbp), %rax
+	movq	24(%rbp), %rdx
+	movq	%rax, %rcx
+	call	_ZNKSt7complexIdE5__repEv
+	movsd	-16(%rbp), %xmm1
+	movsd	-8(%rbp), %xmm0
+	movq	%xmm1, %rdx
+	movq	%xmm0, %rax
+	movq	%rdx, %rcx
+	movq	%rax, %rdx
+	movq	16(%rbp), %rax
+	movsd	(%rax), %xmm1
+	movq	16(%rbp), %rax
+	movsd	8(%rax), %xmm0
+	movq	%rcx, %xmm3
+	movq	%rdx, %xmm2
+	subsd	%xmm3, %xmm1
+	subsd	%xmm2, %xmm0
+	movq	16(%rbp), %rax
+	movsd	%xmm1, (%rax)
+	movq	16(%rbp), %rax
+	movsd	%xmm0, 8(%rax)
+	movq	16(%rbp), %rax
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZNKSt6_ArrayISt7complexIdEE5beginEv,"x"
+	.linkonce discard
+	.align 2
+	.globl	_ZNKSt6_ArrayISt7complexIdEE5beginEv
+	.def	_ZNKSt6_ArrayISt7complexIdEE5beginEv;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZNKSt6_ArrayISt7complexIdEE5beginEv
+_ZNKSt6_ArrayISt7complexIdEE5beginEv:
+.LFB3675:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.text$_ZSt25__valarray_copy_constructISt7complexIdEEvPKT_yyPS2_,"x"
+	.linkonce discard
+	.globl	_ZSt25__valarray_copy_constructISt7complexIdEEvPKT_yyPS2_
+	.def	_ZSt25__valarray_copy_constructISt7complexIdEEvPKT_yyPS2_;	.scl	2;	.type	32;	.endef
+	.seh_proc	_ZSt25__valarray_copy_constructISt7complexIdEEvPKT_yyPS2_
+_ZSt25__valarray_copy_constructISt7complexIdEEvPKT_yyPS2_:
+.LFB3676:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movq	%r8, 32(%rbp)
+	movq	%r9, 40(%rbp)
+.L66:
+	movq	24(%rbp), %rax
+	leaq	-1(%rax), %rdx
+	movq	%rdx, 24(%rbp)
+	testq	%rax, %rax
+	setne	%al
+	testb	%al, %al
+	je	.L67
+	movq	40(%rbp), %rax
+	leaq	16(%rax), %rdx
+	movq	%rdx, 40(%rbp)
+	movq	%rax, %rdx
+	movl	$16, %ecx
+	call	_ZnwyPv
+	movq	16(%rbp), %rdx
+	movsd	(%rdx), %xmm0
+	movsd	%xmm0, (%rax)
+	movsd	8(%rdx), %xmm0
+	movsd	%xmm0, 8(%rax)
+	movq	32(%rbp), %rax
+	salq	$4, %rax
+	addq	%rax, 16(%rbp)
+	jmp	.L66
+.L67:
+	nop
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.text
+	.def	__tcf_0;	.scl	3;	.type	32;	.endef
+	.seh_proc	__tcf_0
+__tcf_0:
+.LFB3780:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	leaq	_ZStL8__ioinit(%rip), %rcx
+	call	_ZNSt8ios_base4InitD1Ev
+	nop
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.def	_Z41__static_initialization_and_destruction_0ii;	.scl	3;	.type	32;	.endef
+	.seh_proc	_Z41__static_initialization_and_destruction_0ii
+_Z41__static_initialization_and_destruction_0ii:
+.LFB3779:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movl	%ecx, 16(%rbp)
+	movl	%edx, 24(%rbp)
+	cmpl	$1, 16(%rbp)
+	jne	.L71
+	cmpl	$65535, 24(%rbp)
+	jne	.L71
+	leaq	_ZStL8__ioinit(%rip), %rcx
+	call	_ZNSt8ios_base4InitC1Ev
+	leaq	__tcf_0(%rip), %rcx
+	call	atexit
+.L71:
+	nop
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.def	_GLOBAL__sub_I__Z3FFTRSt8valarrayISt7complexIdEE;	.scl	3;	.type	32;	.endef
+	.seh_proc	_GLOBAL__sub_I__Z3FFTRSt8valarrayISt7complexIdEE
+_GLOBAL__sub_I__Z3FFTRSt8valarrayISt7complexIdEE:
+.LFB3781:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movl	$65535, %edx
+	movl	$1, %ecx
+	call	_Z41__static_initialization_and_destruction_0ii
+	nop
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section	.ctors,"w"
+	.align 8
+	.quad	_GLOBAL__sub_I__Z3FFTRSt8valarrayISt7complexIdEE
+	.section .rdata,"dr"
+	.align 8
+.LC0:
+	.long	1413754602
+	.long	-1072094725
+	.align 8
+.LC1:
+	.long	0
+	.long	1072693248
+	.ident	"GCC: (GNU) 9.2.0"
+	.def	_ZdlPv;	.scl	2;	.type	32;	.endef
+	.def	_Unwind_Resume;	.scl	2;	.type	32;	.endef
+	.def	sin;	.scl	2;	.type	32;	.endef
+	.def	cos;	.scl	2;	.type	32;	.endef
+	.def	_Znwy;	.scl	2;	.type	32;	.endef
+	.def	__muldc3;	.scl	2;	.type	32;	.endef
+	.def	_ZNSt8ios_base4InitD1Ev;	.scl	2;	.type	32;	.endef
+	.def	_ZNSt8ios_base4InitC1Ev;	.scl	2;	.type	32;	.endef
+	.def	atexit;	.scl	2;	.type	32;	.endef
