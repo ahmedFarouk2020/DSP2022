@@ -19,14 +19,12 @@ void FFT(ComplexArray& data){
     FFT(Even);
     FFT(Odd);
     
-    //calculate the complex values 
-    // this part is taken from a website and i didnt get it very much
-
-    for (size_t i = 0 ; i < size/2 ; i++)
+    //calculate the complex values and put it back in the same array called data
+    for (size_t k = 0 ; k < size/2 ; ++k)
     {
-        Complex T = std::polar(1.0,-2*PI*i/size)*Odd[i];
-        data[i] = Even[i]+T;
-        data[i+(size/2)] = Even[i]-T;
+        Complex T = std::polar(1.0,-2 * PI * k/size) * Odd[k];
+        data[k] = Even[k]+T;
+        data[k+(size/2)] = Even[k]-T;
 
     }
     
