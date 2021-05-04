@@ -61,7 +61,6 @@ class Mixer(QtCore.QThread) :
         data_of_component_2 = getattr(self,"image2_" + component_2) # phase
         opposite_data_of_component_2 = getattr(self,"image2_" + components.opposite(component_2)) # mag
         self.addToProgressCountAndEmit(10)
-        time.sleep(0.1)
         #divide mixing ratio by 100 and multiply it by the length to get the desired data
         desired_length_of_data_1 = int((mixingRatio_1 / 100 ) * len(data_of_component_1)) # 480
         desired_length_of_data_2 = int((mixingRatio_2 / 100 ) * len(data_of_component_2)) # 0
@@ -80,45 +79,19 @@ class Mixer(QtCore.QThread) :
         # n^3 
         data_after_mixing = []
         if component_1 == components.real : 
-            for i in range(len(final_data_of_component_1)) : 
-                arr2=[]
-                for j in range(len(final_data_of_component_1[i])) : 
-                    arr3 = []
-                    for g in range(len(final_data_of_component_1[i][j])) : 
-                        c = complex(float(final_data_of_component_1[i][j][g]),float(final_data_of_component_2[i][j][g]))
-                        arr3.append(c)
-                    arr2.append(arr3)
-                data_after_mixing.append(arr2)
+            imaginary_part = np.array(final_data_of_component_2) * 1j
+            data_after_mixing = np.add(final_data_of_component_1,imaginary_part)
         elif component_1 == components.imaginary : 
-            for i in range(len(final_data_of_component_1)) : 
-                arr2=[]
-                for j in range(len(final_data_of_component_1[i])) : 
-                    arr3 = []
-                    for g in range(len(final_data_of_component_1[i][j])) : 
-                        c = complex(float(final_data_of_component_2[i][j][g]),float(final_data_of_component_1[i][j][g]))
-                        arr3.append(c)
-                    arr2.append(arr3)
-                data_after_mixing.append(arr2)
+            imaginary_part = np.array(final_data_of_component_1) * 1j
+            data_after_mixing = np.add(final_data_of_component_2,imaginary_part)
         elif component_1 == components.magnitude or component_1 == components.uniform_magnitude : 
-            for i in range(len(final_data_of_component_1)) : 
-                arr2=[]
-                for j in range(len(final_data_of_component_1[i])) : 
-                    arr3 = []
-                    for g in range(len(final_data_of_component_1[i][j])) : 
-                        c = final_data_of_component_1[i][j][g] * np.exp(1j*final_data_of_component_2[i][j][g])
-                        arr3.append(c)
-                    arr2.append(arr3)
-                data_after_mixing.append(arr2)
+            imaginary_part = np.array(final_data_of_component_2) * 1j
+            exp_part = np.exp(imaginary_part)
+            data_after_mixing = np.multiply(final_data_of_component_1,exp_part)
         else : 
-            for i in range(len(final_data_of_component_1)) : 
-                arr2=[]
-                for j in range(len(final_data_of_component_1[i])) : 
-                    arr3 = []
-                    for g in range(len(final_data_of_component_1[i][j])) : 
-                        c = final_data_of_component_2[i][j][g] * np.exp(1j*final_data_of_component_1[i][j][g])
-                        arr3.append(c)
-                    arr2.append(arr3)
-                data_after_mixing.append(arr2)
+            imaginary_part = np.array(final_data_of_component_1) * 1j
+            exp_part = np.exp(imaginary_part)
+            data_after_mixing = np.multiply(final_data_of_component_2,exp_part)
         self.addToProgressCountAndEmit(30)
         original_data_after_mixing = ifft2(data_after_mixing)
         self.addToProgressCountAndEmit(10)

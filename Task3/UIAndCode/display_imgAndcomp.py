@@ -9,6 +9,7 @@ import png
 import os
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import os
 
 
 class PromptError():
@@ -22,17 +23,15 @@ class PromptError():
 class DisplayImgComp(PromptError):
     def __init__(self):
         # path of img1
-        path1 = 'C:\DSP2022\Task3\الصور اللى هنشتغل عليها\stinkbug1.png'
+        path1 = os.path.realpath('../images/dog.jpg')
         # path of img2
-        path2 = 'C:\DSP2022\Task3\الصور اللى هنشتغل عليها\stinkbug2.png'
+        path2 = os.path.realpath('../images/cat.jpg')
         # path of img1 component
-        path3 = 'C:\DSP2022\Task3\الصور اللى هنشتغل عليها\img1comp.png'
+        path3 = os.path.realpath('../images/img1comp.png')
         # path of img1 component
-        path4 = 'C:\DSP2022\Task3\الصور اللى هنشتغل عليها\stinkbug.png'
+        path4 = os.path.realpath('../images/stinkbug.png')
 
-        path5 = "dog.jpg"
-        path6 = "cat.jpg"
-        self.paths = [path1,path2,path3,path4,path5,path6] 
+        self.paths = [path1,path2,path3,path4] 
         image_arr1=mpimg.imread(path1)
         image_arr2=mpimg.imread(path2)
         self.img_arrays = [image_arr1,image_arr2]

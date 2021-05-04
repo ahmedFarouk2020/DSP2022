@@ -11,6 +11,8 @@ from display_imgAndcomp import DisplayImgComp
 from Mixer import Mixer
 import Components as components
 import matplotlib.pyplot as plt
+import os
+
 
 class mixingRationSlider(QtWidgets.QSlider) : 
     def __init__(self) : 
@@ -20,6 +22,18 @@ class mixingRationSlider(QtWidgets.QSlider) :
     def mouseReleaseEvent(self,ev) :
         self.mouseReleaseMethod(ev)
 
+class newAction(QtWidgets.QAction):
+    def __init__(self,parent,iconPath,objectName,keySequance="",method_to_trigger=None):
+        super(newAction,self).__init__()
+        self.setParent(parent)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(iconPath), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setIcon(icon)
+        self.setObjectName(objectName)
+        shortCut = QtWidgets.QShortcut(QtGui.QKeySequence(keySequance),parent)
+        if method_to_trigger != None : 
+            shortCut.activated.connect(method_to_trigger)
+            self.triggered.connect(method_to_trigger)
 
 class Ui_MainWindow(DisplayImgComp):
     def __init__(self):
@@ -242,9 +256,12 @@ class Ui_MainWindow(DisplayImgComp):
         self.gridLayout_4.addWidget(self.viewer2, 0, 1, 1, 1)
         self.gridLayout_5.addWidget(self.OutputGroupBox, 1, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
+        # open images action
+        self.openImageAction = newAction(MainWindow,"","openImageAction","Ctrl+O")
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1450, 26))
         self.menubar.setObjectName("menubar")
+        
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -438,13 +455,13 @@ class Ui_MainWindow(DisplayImgComp):
         imgage_2 = None
         # get images 
         if self.Component1ComboBox1.currentText() == "Image 1" : 
-            imgage_1 = DisplayImgComp().paths[4]
+            imgage_1 = DisplayImgComp().paths[0]
         if self.Component1ComboBox1.currentText() == "Image 2" : 
-            imgage_1 = DisplayImgComp().paths[5]
+            imgage_1 = DisplayImgComp().paths[1]
         if self.Component2ComboBox1.currentText() == "Image 1" :
-            imgage_2 = DisplayImgComp().paths[4]
+            imgage_2 = DisplayImgComp().paths[0]
         if self.Component2ComboBox1.currentText() == "Image 2" :
-            imgage_2 = DisplayImgComp().paths[5]
+            imgage_2 = DisplayImgComp().paths[1]
         #get components 
         component_1 = self.Component1ComboBox2.currentText()
         component_2 = self.Component2ComboBox2.currentText()
@@ -462,14 +479,13 @@ class Ui_MainWindow(DisplayImgComp):
         data_after_Mixing = mixer.mix_with_the_opposite(component_1,mixingRatio_1,component_2,mixingRatio_2)
         plt.imshow(data_after_Mixing)
         plt.axis('off')
-        plt.savefig("Output.png",bbox_inches='tight')
-        output_image = QtGui.QPixmap("Output.png")
+        plt.savefig(os.path.realpath('../images/Output.png'),bbox_inches='tight')
+        output_image = QtGui.QPixmap(os.path.realpath('../images/Output.png'))
         viewer.setPixmap(output_image.scaled(viewer.width(),viewer.height(),QtCore.Qt.IgnoreAspectRatio))
         # hide progress bar
         self.progressBar.hide()
     def updateProgressBar(self,count) : 
         self.progressBar.setValue(count)
-        # print(str(count) + " %")
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
