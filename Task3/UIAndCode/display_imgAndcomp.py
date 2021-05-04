@@ -98,6 +98,8 @@ class DisplayImgComp(PromptError):
         complex_arr = fft2(image_arr)
         #shifted_complex = fftshift(complex_arr)
         imagnary = [x.imag for x in complex_arr]
+        # imagnary = np.array(imagnary) + 0j
+        imagnary = np.array(imagnary) * 1j
         img_arr = ifft2(imagnary)
         # get magnitude of array element to remove very small real numbers
         img_arr = [x.real for x in img_arr]
@@ -127,13 +129,14 @@ class DisplayImgComp(PromptError):
         #magnitude_spectrumB = 20*np.log(np.abs(fshift1)) ****************************
 
         img_arr = ifft2(phase_spectrumA)
-
+        # print(image_arr)
         #remove complex part
         img_arr = [x.real for x in img_arr]
         img_arr = np.int32(img_arr)
         plt.imshow(img_arr)
         plt.axis('off')
-        plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
+        plt.show()
+        # plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
         #mpimg.imsave(self.paths[img_number + 1], img_arr)
 
         # imgplot = plt.imshow(img_arr)
