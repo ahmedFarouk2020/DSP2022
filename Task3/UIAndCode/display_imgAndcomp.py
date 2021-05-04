@@ -29,7 +29,7 @@ class DisplayImgComp(PromptError):
         # path of img1 component
         path3 = os.path.realpath('../images/img1comp.png')
         # path of img1 component
-        path4 = os.path.realpath('../images/stinkbug.png')
+        path4 = os.path.realpath('../images/img2comp.png')
 
         self.paths = [path1,path2,path3,path4] 
         image_arr1=mpimg.imread(path1)
@@ -41,6 +41,7 @@ class DisplayImgComp(PromptError):
 # what you craete inside UI.py(create img1 and 2) will be global for all
 # the other labels
 # this file will be imported in UI.py
+
 
     def get_img_magnitude(self, img_number=1):
 
@@ -60,7 +61,11 @@ class DisplayImgComp(PromptError):
         # divid max value in array by all elements in the array ()
         #img_comp_mag = np.true_divide(magnitude,max_magnitude)
         #print(img_comp_mag)
-        mpimg.imsave(self.paths[img_number + 1], img_arr)
+        img_arr = np.int32(img_arr)
+        plt.imshow(img_arr)
+        plt.axis('off')
+        plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
+        #mpimg.imsave(self.paths[img_number + 1], img_arr)
 
     def get_img_reals(self, img_number=1):
 
@@ -78,14 +83,18 @@ class DisplayImgComp(PromptError):
         # max_magnitude = np.amax(magnitude)
         # img_comp_mag = np.true_divide(magnitude,max_magnitude)
         # #print(img_comp_mag)
-        mpimg.imsave(self.paths[img_number + 1], img_arr)
+        img_arr = np.int32(img_arr)
+        plt.imshow(img_arr)
+        plt.axis('off')
+        plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
+        #mpimg.imsave(self.paths[img_number + 1], img_arr)
 
     def get_img_imgnary(self, img_number=1):
 
         # get arrays of images
         image_arr = self.img_arrays[img_number - 1]
         complex_arr = fft2(image_arr)
-        shifted_complex = fftshift(complex_arr)
+        #shifted_complex = fftshift(complex_arr)
         imagnary = [x.imag for x in complex_arr]
         img_arr = ifft2(imagnary)
         # get magnitude of array element to remove very small real numbers
@@ -96,7 +105,11 @@ class DisplayImgComp(PromptError):
         # max_magnitude = np.amax(magnitude)
         # img_comp_mag = np.true_divide(magnitude,max_magnitude)
         # #print(img_comp_mag)
-        mpimg.imsave(self.paths[img_number + 1], img_arr)
+        img_arr = np.int32(img_arr)
+        plt.imshow(img_arr)
+        plt.axis('off')
+        plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
+        #mpimg.imsave(self.paths[img_number + 1], img_arr)
 
     def get_img_phase(self, img_number=1):
 
@@ -104,7 +117,7 @@ class DisplayImgComp(PromptError):
         image_arr = self.img_arrays[img_number - 1]
 
         complex_arr = fft2(image_arr)
-        shifted_complex = fftshift(complex_arr)
+        #shifted_complex = fftshift(complex_arr)
         # get phase component
         phase_spectrumA = np.angle(complex_arr)
         #self.save_in_file(phase_spectrumA)
@@ -115,12 +128,18 @@ class DisplayImgComp(PromptError):
 
         #remove complex part
         img_arr = [x.real for x in img_arr]
-        mpimg.imsave(self.paths[img_number + 1], img_arr)
+        img_arr = np.int32(img_arr)
+        plt.imshow(img_arr)
+        plt.axis('off')
+        plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
+        #mpimg.imsave(self.paths[img_number + 1], img_arr)
 
         # imgplot = plt.imshow(img_arr)
         # plt.show()
         # imgplot = plt.imshow(self.image_arr2)
         # plt.show()
+
+
 
 ###########################################################
 # the below functions are for debugging (not used in the code)
