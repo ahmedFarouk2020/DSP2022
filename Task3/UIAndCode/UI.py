@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from display_imgAndcomp import DisplayImgComp
+from display_imgAndcomp import DisplayImgComp,PromptError
 from Mixer import Mixer
 import Components as components
 import matplotlib.pyplot as plt
@@ -35,12 +35,22 @@ class newAction(QtWidgets.QAction):
             shortCut.activated.connect(method_to_trigger)
             self.triggered.connect(method_to_trigger)
 
+class main_window(QtWidgets.QMainWindow) :
+    def __init__(self) :
+        super().__init__()
+        self.resizeMethod = None
+    def resizeEvent(self,ev) :
+        self.resizeMethod(ev)
+
 class Ui_MainWindow(DisplayImgComp):
     def __init__(self):
         super().__init__()
 
     def setupUi(self, MainWindow):
+        # MainWindow = QtWidgets.QMainWindow()
         MainWindow.setObjectName("MainWindow")
+        #resize event 
+        MainWindow.resizeMethod = self.resizeWindow
         MainWindow.resize(800, 500)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("PNG/editor.png"), QtGui.QIcon.Normal,
@@ -257,11 +267,14 @@ class Ui_MainWindow(DisplayImgComp):
         self.gridLayout_5.addWidget(self.OutputGroupBox, 1, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         # open images action
-        self.openImageAction = newAction(MainWindow,"","openImageAction","Ctrl+O")
+        self.openImageAction = newAction(MainWindow,os.path.realpath('../images/folder.png'),"openImageAction","Ctrl+O",self.openImages)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1450, 26))
         self.menubar.setObjectName("menubar")
-        
+        # tool bar
+        self.toolBar = QtWidgets.QToolBar(MainWindow)
+        self.toolBar.setObjectName("toolBar")
+        self.toolBar.addAction(self.openImageAction)
+        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -272,6 +285,8 @@ class Ui_MainWindow(DisplayImgComp):
         self.progressBar.setMaximum(100)
         self.progressBar.hide()
         self.gridLayout_2.addWidget(self.progressBar,5,1,1,3)
+        # hide data
+        self.centralwidget.hide()
         # window = window.windowType()
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -455,13 +470,13 @@ class Ui_MainWindow(DisplayImgComp):
         imgage_2 = None
         # get images 
         if self.Component1ComboBox1.currentText() == "Image 1" : 
-            imgage_1 = DisplayImgComp().paths[0]
+            imgage_1 = self.paths[0]
         if self.Component1ComboBox1.currentText() == "Image 2" : 
-            imgage_1 = DisplayImgComp().paths[1]
+            imgage_1 = self.paths[1]
         if self.Component2ComboBox1.currentText() == "Image 1" :
-            imgage_2 = DisplayImgComp().paths[0]
+            imgage_2 = self.paths[0]
         if self.Component2ComboBox1.currentText() == "Image 2" :
-            imgage_2 = DisplayImgComp().paths[1]
+            imgage_2 = self.paths[1]
         #get components 
         component_1 = self.Component1ComboBox2.currentText()
         component_2 = self.Component2ComboBox2.currentText()
@@ -479,17 +494,54 @@ class Ui_MainWindow(DisplayImgComp):
         data_after_Mixing = mixer.mix_with_the_opposite(component_1,mixingRatio_1,component_2,mixingRatio_2)
         plt.imshow(data_after_Mixing)
         plt.axis('off')
-        plt.savefig(os.path.realpath('../images/Output.png'),bbox_inches='tight')
-        output_image = QtGui.QPixmap(os.path.realpath('../images/Output.png'))
+        pth = '../images/Output' + str(self.OutputCombobox.currentIndex() + 1) + '.png'
+        plt.savefig(os.path.realpath(pth),bbox_inches='tight')
+        output_image = QtGui.QPixmap(os.path.realpath(pth))
         viewer.setPixmap(output_image.scaled(viewer.width(),viewer.height(),QtCore.Qt.IgnoreAspectRatio))
+        
         # hide progress bar
         self.progressBar.hide()
     def updateProgressBar(self,count) : 
         self.progressBar.setValue(count)
+
+    def openImages(self) :
+        dialog = QtWidgets.QFileDialog()
+        dialog.setFileMode(QtWidgets.QFileDialog.AnyFile)
+        directory = dialog.getOpenFileNames(None,'select file',__file__,'image files (*.png *.jpg *.jpeg)')
+        images = directory[0]
+        if len(images) != 2 : 
+            #error message for
+            PromptError().error_message("please choose two images") 
+            return
+        # check the size of the two images 
+        try : 
+            mixer = Mixer(images[0],images[1])
+            if not mixer.is_the_same_size() : 
+                PromptError().error_message("please check that the two images has the same size")
+                return
+            # draw components and set the mixer up
+            self.paths[0] = images[0] 
+            self.paths[1] = images[1]
+            self.Update_img1Component(self.Image1ComboBox.currentIndex())
+            self.Update_img2Component(self.Image2ComboBox.currentIndex())
+            #update mixer
+            self.mix()
+            # show data 
+            self.centralwidget.show()
+        except : 
+            PromptError().error_message("please check that the two images has the same size")
+
+    def resizeWindow(self,ev) : 
+        if(self.viewer1.pixmap()) :
+            self.viewer1.setPixmap(QtGui.QPixmap(os.path.realpath("../images/Output1.png")).scaled(self.viewer1.width(),self.viewer1.height(),QtCore.Qt.IgnoreAspectRatio))
+        if(self.viewer2.pixmap()) :
+            self.viewer2.setPixmap(QtGui.QPixmap(os.path.realpath("../images/Output2.png")).scaled(self.viewer2.width(),self.viewer2.height(),QtCore.Qt.IgnoreAspectRatio))
+            
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
+    MainWindow = main_window()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     ui.Update_img_componentV2(0, "img1")

@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QWidget,QMessageBox,QMainWindow
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5 import QtCore
 import sys
@@ -14,7 +14,7 @@ import os
 
 class PromptError():
     def error_message(self, message):
-        window = QtWidgets.QMessageBox()
+        window = QMessageBox()
         window.setWindowTitle("ERROR")
         window.setText(message)
         window.exec_()
@@ -22,6 +22,8 @@ class PromptError():
 
 class DisplayImgComp(PromptError):
     def __init__(self):
+        #resize method 
+        self.resizeMethod = None
         # path of img1
         path1 = os.path.realpath('../images/dog.jpg')
         # path of img2
@@ -139,7 +141,6 @@ class DisplayImgComp(PromptError):
         imgplot = plt.imshow(lum_img)
         imgplot.set_cmap('hot')
         mpimg.imsave(self.path3, lum_img)
-
 
 # ob = DisplayImgComp()
 # ob.get_img_phase()

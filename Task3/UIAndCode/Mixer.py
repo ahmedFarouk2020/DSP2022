@@ -105,6 +105,11 @@ class Mixer(QtCore.QThread) :
     def addToProgressCountAndEmit(self,count) :
         self.progressCount += count 
         self.signal.emit(self.progressCount)
+    def is_the_same_size(self) : 
+        if (len(self.image1_data_fft) == len(self.image2_data_fft)) : 
+            return True 
+        else : 
+            return False
 
 
 
