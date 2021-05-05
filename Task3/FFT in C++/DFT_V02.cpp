@@ -6,37 +6,45 @@
 #include <iterator>
 
 using namespace std;
-#define M_PI 3.14159265359
-
+#define PI 3.1415926536
+typedef complex<double> Complex;
     
-vector<complex<double>> dft(vector<double> real_input)
+vector<Complex> dft2(vector<Complex> real_input)
 {
     // container to store complex result
-    vector<complex<double>> complex_output;
+    vector<Complex> complex_output(0);
 
     // real, imaginary part of k-th complex element
     double real = 0;
     double imgn = 0;
 
     // temperary variable to combine real, imaginary pairs inside
-    complex<double> temp;
+    Complex temp = 0;
 
     // number of elements in array
     int N = real_input.size();
 
-    for(int k = 0; k < N; k++){
+    double phase, sine, cosine;
 
+    for(int k = 0; k < N; k++){
+        real = 0;
+        imgn = 0;
         // produce one element "S(k)" of complex output
         for(int n = 0; n < N; n++)
         {
-            real += cos((2 * M_PI * k * n) / N) * real_input[n];
-            imgn += -sin((2 * M_PI * k * n) / N) * real_input[n];
+            phase = (-2 * PI * k * n) / N;
+            cosine = cos(phase);
+            sine = sin(phase);
+            std::cout<< "cos: " <<cosine<< '\n';
+            real += real_input[n].real() * cosine - real_input[n].imag() * sine;
+
+            imgn += real_input[n].real() * sine + real_input[n].imag() * cosine ;
         }
 
         temp.real(real);
         temp.imag(imgn);
 
-        // push the complex element in the output container
+    // push the complex element in the output container
         complex_output.push_back(temp);
     }
     return complex_output;   // O(n2)
@@ -45,29 +53,10 @@ vector<complex<double>> dft(vector<double> real_input)
 
 
 
-/*
-vector<complex<double>> DFT(double in, int k)
-{
-    double a = 0;
-    double b = 0;
-    int N = input.size();
-    for(int k = 0; k < input.size(); k++){
-        for(int n = 0; n < N; n++)
-        {
-            a+= cos((2 * M_PI * k * n) / N) * input[n];
-            b+= -sin((2 * M_PI * k * n) / N) * input[n];
-        }
-        output.push_back(DFT(input[k], k));
-    }
-    complex<double> temp(a, b); // get only on point
-    return temp;
-}
-*/
 int main()
 {
-    vector<complex<double>>complex_out = dft({1564.0,4654.0,46.0,64.0,657.0,897198.0,7897.0,98786
-                                                    ,7186,176,716,71,16871867,876});
-    vector<complex<double>>::iterator i = complex_out.begin();
+    vector<Complex>complex_out = dft2({13251,12,15});
+    vector<Complex>::iterator i = complex_out.begin();
     /* print the output */
     cout<<'[';
     for (; i != complex_out.end(); ++i)
