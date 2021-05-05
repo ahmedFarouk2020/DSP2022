@@ -25,9 +25,9 @@ class DisplayImgComp(PromptError):
         #resize method 
         self.resizeMethod = None
         # path of img1
-        path1 = os.path.realpath('../images/dog.jpg')
+        path1 = os.path.realpath('../images/test1.jpg')
         # path of img2
-        path2 = os.path.realpath('../images/cat.jpg')
+        path2 = os.path.realpath('../images/test2.jpg')
         # path of img1 component
         path3 = os.path.realpath('../images/img1comp.png')
         # path of img1 component
@@ -51,20 +51,20 @@ class DisplayImgComp(PromptError):
         image_arr = self.img_arrays[img_number - 1]
         complex_arr = fft2(image_arr)
         #shift the signal to origin
-        #shifted_complex = fftshift(complex_arr)
+        shifted_complex = fftshift(complex_arr)
 
         # get magnitude of np complex array
         #magnitude = np.log(np.abs(shifted_sig))
-        magnitude = abs(complex_arr)
-        img_arr = ifft2(magnitude)
-        img_arr = [x.real for x in img_arr]
+        magnitude = abs(shifted_complex)
+        # img_arr = ifft2(magnitude)
+        # img_arr = [x.real for x in img_arr]
         #print(img_arr)
         #max_magnitude = np.amax(magnitude)
         # divid max value in array by all elements in the array ()
         #img_comp_mag = np.true_divide(magnitude,max_magnitude)
         #print(img_comp_mag)
-        img_arr = np.int32(img_arr)
-        plt.imshow(img_arr)
+        # img_arr = np.int32(img_arr)
+        plt.imshow(magnitude)
         plt.axis('off')
         plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
         #mpimg.imsave(self.paths[img_number + 1], img_arr)
@@ -75,18 +75,19 @@ class DisplayImgComp(PromptError):
         image_arr = self.img_arrays[img_number - 1]
         complex_arr = fft2(image_arr)
         shifted_complex = fftshift(complex_arr)
-        reals = [x.real for x in complex_arr]
-        img_arr = ifft2(reals)
+        reals = np.real(shifted_complex)
+        # reals = [x.real for x in complex_arr]
+        # img_arr = ifft2(reals)
         # remove the imaginary part form final img array
-        img_arr = [x.real for x in img_arr]
+        # img_arr = [x.real for x in img_arr]
         #print(img_arr)
         #print(reals)
         #png.from_array(reals,mode="L").save("C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png")
         # max_magnitude = np.amax(magnitude)
         # img_comp_mag = np.true_divide(magnitude,max_magnitude)
         # #print(img_comp_mag)
-        img_arr = np.int32(img_arr)
-        plt.imshow(img_arr)
+        # img_arr = np.int32(img_arr)
+        plt.imshow(reals)
         plt.axis('off')
         plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
         #mpimg.imsave(self.paths[img_number + 1], img_arr)
@@ -96,21 +97,21 @@ class DisplayImgComp(PromptError):
         # get arrays of images
         image_arr = self.img_arrays[img_number - 1]
         complex_arr = fft2(image_arr)
-        #shifted_complex = fftshift(complex_arr)
-        imagnary = [x.imag for x in complex_arr]
+        shifted_complex = fftshift(complex_arr)
+        shifted_complex = np.imag(shifted_complex)
         # imagnary = np.array(imagnary) + 0j
-        imagnary = np.array(imagnary) * 1j
-        img_arr = ifft2(imagnary)
+        # imagnary = np.array(imagnary) * 1j
+        # img_arr = ifft2(imagnary)
         # get magnitude of array element to remove very small real numbers
-        img_arr = [x.real for x in img_arr]
+        # img_arr = [x.real for x in img_arr]
         #print(img_arr)
         #print(imagnary)
         #png.from_array(reals,mode="L").save("C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png")
         # max_magnitude = np.amax(magnitude)
         # img_comp_mag = np.true_divide(magnitude,max_magnitude)
         # #print(img_comp_mag)
-        img_arr = np.int32(img_arr)
-        plt.imshow(img_arr)
+        # img_arr = np.int32(img_arr)
+        plt.imshow(shifted_complex)
         plt.axis('off')
         plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
         #mpimg.imsave(self.paths[img_number + 1], img_arr)
@@ -121,22 +122,21 @@ class DisplayImgComp(PromptError):
         image_arr = self.img_arrays[img_number - 1]
 
         complex_arr = fft2(image_arr)
-        #shifted_complex = fftshift(complex_arr)
+        shifted_complex = fftshift(complex_arr)
         # get phase component
-        phase_spectrumA = np.angle(complex_arr)
+        phase_spectrumA = np.angle(shifted_complex)
         #self.save_in_file(phase_spectrumA)
 
         #magnitude_spectrumB = 20*np.log(np.abs(fshift1)) ****************************
 
-        img_arr = ifft2(phase_spectrumA)
+        # img_arr = ifft2(phase_spectrumA)
         # print(image_arr)
         #remove complex part
-        img_arr = [x.real for x in img_arr]
-        img_arr = np.int32(img_arr)
-        plt.imshow(img_arr)
+        # img_arr = [x.real for x in img_arr]
+        # img_arr = np.int32(img_arr)
+        plt.imshow(phase_spectrumA)
         plt.axis('off')
-        plt.show()
-        # plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
+        plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
         #mpimg.imsave(self.paths[img_number + 1], img_arr)
 
         # imgplot = plt.imshow(img_arr)

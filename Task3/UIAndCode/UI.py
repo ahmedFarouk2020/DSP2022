@@ -22,19 +22,6 @@ class mixingRationSlider(QtWidgets.QSlider) :
     def mouseReleaseEvent(self,ev) :
         self.mouseReleaseMethod(ev)
 
-class newAction(QtWidgets.QAction):
-    def __init__(self,parent,iconPath,objectName,keySequance="",method_to_trigger=None):
-        super(newAction,self).__init__()
-        self.setParent(parent)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(iconPath), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.setIcon(icon)
-        self.setObjectName(objectName)
-        shortCut = QtWidgets.QShortcut(QtGui.QKeySequence(keySequance),parent)
-        if method_to_trigger != None : 
-            shortCut.activated.connect(method_to_trigger)
-            self.triggered.connect(method_to_trigger)
-
 class main_window(QtWidgets.QMainWindow) :
     def __init__(self) :
         super().__init__()
@@ -266,15 +253,8 @@ class Ui_MainWindow(DisplayImgComp):
         self.gridLayout_4.addWidget(self.viewer2, 0, 1, 1, 1)
         self.gridLayout_5.addWidget(self.OutputGroupBox, 1, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
-        # open images action
-        self.openImageAction = newAction(MainWindow,os.path.realpath('../images/folder.png'),"openImageAction","Ctrl+O",self.openImages)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setObjectName("menubar")
-        # tool bar
-        self.toolBar = QtWidgets.QToolBar(MainWindow)
-        self.toolBar.setObjectName("toolBar")
-        self.toolBar.addAction(self.openImageAction)
-        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -285,8 +265,6 @@ class Ui_MainWindow(DisplayImgComp):
         self.progressBar.setMaximum(100)
         self.progressBar.hide()
         self.gridLayout_2.addWidget(self.progressBar,5,1,1,3)
-        # hide data
-        self.centralwidget.hide()
         # window = window.windowType()
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -305,6 +283,8 @@ class Ui_MainWindow(DisplayImgComp):
         self.Component2ComboBox2.currentIndexChanged.connect(
             lambda: self.valuechange_Component1ComboBox2(2))
 
+        self.Component1ComboBox1.currentIndexChanged.connect(self.mix)
+        self.OutputCombobox.currentIndexChanged.connect(self.mix)
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -457,10 +437,16 @@ class Ui_MainWindow(DisplayImgComp):
         self.mix()
 
     def valuechange_Component1ComboBox2(self, num_combox):
-        if num_combox == 1:
+        # if num_combox == 1:
+        if self.Component1ComboBox2.currentText() == components.real or self.Component2ComboBox2.currentText() == components.imaginary :
             self.Component2ComboBox2.setCurrentText(components.opposite(self.Component1ComboBox2.currentText()))
-        else:
+        else :
+            pass
+    # else:
+        if self.Component2ComboBox2.currentText() == components.real or self.Component2ComboBox2.currentText() == components.imaginary :
             self.Component1ComboBox2.setCurrentText(components.opposite(self.Component2ComboBox2.currentText()))
+        else : 
+            pass
         self.mix()
     def mix(self) : 
         # prgress bar setup
@@ -503,33 +489,6 @@ class Ui_MainWindow(DisplayImgComp):
         self.progressBar.hide()
     def updateProgressBar(self,count) : 
         self.progressBar.setValue(count)
-
-    def openImages(self) :
-        dialog = QtWidgets.QFileDialog()
-        dialog.setFileMode(QtWidgets.QFileDialog.AnyFile)
-        directory = dialog.getOpenFileNames(None,'select file',__file__,'image files (*.png *.jpg *.jpeg)')
-        images = directory[0]
-        if len(images) != 2 : 
-            #error message for
-            PromptError().error_message("please choose two images") 
-            return
-        # check the size of the two images 
-        try : 
-            mixer = Mixer(images[0],images[1])
-            if not mixer.is_the_same_size() : 
-                PromptError().error_message("please check that the two images has the same size")
-                return
-            # draw components and set the mixer up
-            self.paths[0] = images[0] 
-            self.paths[1] = images[1]
-            self.Update_img1Component(self.Image1ComboBox.currentIndex())
-            self.Update_img2Component(self.Image2ComboBox.currentIndex())
-            #update mixer
-            self.mix()
-            # show data 
-            self.centralwidget.show()
-        except : 
-            PromptError().error_message("please check that the two images has the same size")
 
     def resizeWindow(self,ev) : 
         if(self.viewer1.pixmap()) :
