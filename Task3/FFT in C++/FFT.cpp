@@ -1,32 +1,68 @@
 #include <iostream>
-#include <valarray> // A class that allows me to do mathematical operations on arrays
-#include <complex>  //to contain complex values
+#include <iomanip>
+#include <complex>
+#include <cmath>
+#include <valarray> /* val arrsy to easy making slice for the our arry */
+
+using namespace std;
 
 const double PI = 3.14159265359;
+typedef complex<double> Complex;
+typedef valarray<Complex> CArray;
 
-typedef std::complex<double> Complex;
-typedef std::valarray<Complex> ComplexArray;
+typedef std::valarray<Complex> CArray;
+extern "C"
+{
+    void calcfft(CArray &samples);
+    void fft (double sample_num,double *input,double *real_output,double*img_output);
+}
 
+void calcfft(CArray &samples)
+{
+    const size_t N = samples.size();
 
-void FFT(ComplexArray& data){
-    const size_t  size = data.size();
-    if (size <= 1 ) return;
-    //devide the array into even and odd based on indecies
-    ComplexArray Even = data[std::slice(0,size/2,2)];
-    
-    ComplexArray Odd = data[std::slice(1,size/2,2)]; 
-    //repeat the division till array size is 1
-    FFT(Even);
-    FFT(Odd);
-    
-    //calculate the complex values and put it back in the same array called data
-    for (size_t k = 0 ; k < size/2 ; ++k)
+    if (N <= 1) {return;}
+
+    // divide
+    CArray even = samples[std::slice(0, N/2, 2)];
+    CArray  odd = samples[std::slice(1, N/2, 2)];
+
+    // conquer
+    calcfft(even);
+    calcfft(odd);
+
+    // combine
+    for (size_t k = 0; k < N/2; ++k)
     {
-        Complex T = std::polar(1.0,-2 * PI * k/size) * Odd[k];
-        data[k] = Even[k]+T;
-        data[k+(size/2)] = Even[k]-T;
-
+        Complex t = std::polar(1.0, -2 * PI * k / N) * odd[k];
+        samples[k    ] =(even[k] + t);
+        samples[k+N/2] = (even[k] - t);
     }
-    
+}
+extern "C"
+
+void fft (double sample_num,double *input,double *real_output,double*img_output){
+
+
+    long vOut = (long)sample_num; //convert sample number to long long 
+    Complex test[vOut];
+
+    for (int i = 0; i < sample_num; ++i)
+    {
+        std::complex<double>sample= input[i]; //for convert every sample to a complex 
+        test[i]=sample;
+        /* code */
+    }
+
+    CArray data(test, sample_num);
+    // forward fft
+    calcfft(data);
+
+    for (int i = 0; i < sample_num; ++i)
+    {
+        real_output[i]=data[i].real();
+        img_output[i]=data[i].imag();
+    }
 
 }
+/*end  of  fast  fourer transform */
