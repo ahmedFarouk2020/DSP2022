@@ -49,18 +49,9 @@ void dft2(double* real_input, int N, double* real_out,double* img_out)
             img_out[k] += real_input[n] * sine ;
 
         }
-        // real_out[k] = real;
-        // img_out[k] = imgn;
-
-        // temp.real(real);
-        // temp.imag(imgn);
-
-    // push the complex element in the output container
-        //complex_output.push_back(temp);
+        
     }
-    // real_out = real_output;
-    // img_out = complex_output;
-    //return complex_output;   // O(n2)
+   // O(n2)
 }
 
 
