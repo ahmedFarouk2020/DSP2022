@@ -7,13 +7,13 @@ import numpy as np
 class efficiencyTest():
     def __init__(self, real_input,real_output,img_output):
         # configure DFT library
-        DFT = ctypes.cdll.LoadLibrary(r'C:\Users\Farouk\Desktop\chocolatey\DFT_pointer.so')
-        DFT.dft2.restype = None
-        DFT.dft2.argtypes = [ndpointer(ctypes.c_double, flags="C_CONTIGUOUS"),
-                            ctypes.c_double,
-                            ndpointer(ctypes.c_double, flags="C_CONTIGUOUS"),
-                            ndpointer(ctypes.c_double, flags="C_CONTIGUOUS")]
-        self.dft = DFT.dft2
+        DFT = ctypes.cdll.LoadLibrary(r'C:\Users\Farouk\Desktop\chocolatey\FFT_DFT.so')
+        DFT.dft.restype = None
+        DFT.dft.argtypes = [ ctypes.c_double,
+                             ndpointer(ctypes.c_double, flags="C_CONTIGUOUS"),
+                             ndpointer(ctypes.c_double, flags="C_CONTIGUOUS"),
+                             ndpointer(ctypes.c_double, flags="C_CONTIGUOUS")]
+        self.dft = DFT.dft
         # configure FFT library
         FFT = ctypes.cdll.LoadLibrary(r'C:\Users\Farouk\Desktop\chocolatey\FFTS.so')
         FFT.fft.restype = None
@@ -39,16 +39,16 @@ class efficiencyTest():
         return self.FFTout
 
     def DFT1(self):
-        self.dft(self.input,self.input.size,self.real_output,self.img_output)
+        self.dft(self.input.size,self.input,self.real_output,self.img_output)
         self.DFTout = self.real_output+ 1j * self.img_output
         return self.DFTout
 
     def startTimer(self):
-        start = time.time() * 1000000
+        start = time.time() * 1000
         return start
 
     def getElapsedTime(self, start):
-        self.elapsedTime = time.time() * 1000000 - start
+        self.elapsedTime = time.time() * 1000 - start
         return self.elapsedTime
 
     def getErrorArray(self,FFTout,DFTout):
@@ -101,7 +101,7 @@ print(error)
 
 a.drawErrorPlot()
 
-N_values = [10, 100, 1000, 10000, 100000] # N-values
+N_values = [2**x for x in range(12)] # N-values
 DFT_time = []
 FFT_time = []
 for x in N_values:
@@ -115,7 +115,7 @@ for x in N_values:
     startDFT = b.startTimer()
     DFT1_out = b.DFT1()
     dft_time = b.getElapsedTime(startDFT)
-    print(f"time for DFT: {dft_time}") 
+    #print(f"time for DFT: {dft_time}") 
     DFT_time.append(dft_time)
     #get fft time
     start = b.startTimer()
