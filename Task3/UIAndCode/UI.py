@@ -12,6 +12,24 @@ from Mixer import Mixer
 import Components as components
 import matplotlib.pyplot as plt
 import os
+import matplotlib.image as mpimg
+import logging
+
+#logging configration 
+logging.basicConfig(filename="app.log",filemode='w',format='%(name)s : %(levelname)s : %(asctime)s : %(message)s',level=logging.DEBUG)
+
+class newAction(QtWidgets.QAction):
+    def __init__(self,parent,iconPath,objectName,keySequance="",method_to_trigger=None):
+        super(newAction,self).__init__()
+        self.setParent(parent)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(iconPath), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.setIcon(icon)
+        self.setObjectName(objectName)
+        shortCut = QtWidgets.QShortcut(QtGui.QKeySequence(keySequance),parent)
+        if method_to_trigger != None : 
+            shortCut.activated.connect(method_to_trigger)
+            self.triggered.connect(method_to_trigger)
 
 
 class mixingRationSlider(QtWidgets.QSlider) : 
@@ -34,11 +52,12 @@ class Ui_MainWindow(DisplayImgComp):
         super().__init__()
 
     def setupUi(self, MainWindow):
+        logging.info("generating Ui widgets ...")
         # MainWindow = QtWidgets.QMainWindow()
         MainWindow.setObjectName("MainWindow")
         #resize event 
         MainWindow.resizeMethod = self.resizeWindow
-        MainWindow.resize(800, 500)
+        MainWindow.setGeometry(0,0,800, 500)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("PNG/editor.png"), QtGui.QIcon.Normal,
                        QtGui.QIcon.On)
@@ -67,15 +86,13 @@ class Ui_MainWindow(DisplayImgComp):
         self.Image1ViewerA = QtWidgets.QLabel(self.Img1GroupBox)
         self.Image1ViewerA.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.Image1ViewerA.setObjectName("Image1ViewerA")
+        self.Image1ViewerA.setMinimumSize(100,100)
         self.gridLayout.addWidget(self.Image1ViewerA, 1, 0, 1, 1)
-        # Display Img 1
-        pixmap = QtGui.QPixmap(self.paths[0])
-        pixmap = pixmap.scaled(355, 300, QtCore.Qt.KeepAspectRatio)
-        self.Image1ViewerA.setPixmap(pixmap)
         #---------------------------------------------------------------
         self.Image1ViewerB = QtWidgets.QLabel(self.Img1GroupBox)
         self.Image1ViewerB.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.Image1ViewerB.setObjectName("Image1ViewerB")
+        self.Image1ViewerB.setMinimumSize(100,100)
         self.gridLayout.addWidget(self.Image1ViewerB, 1, 1, 1, 1)
 
         ##############################################################
@@ -191,12 +208,8 @@ class Ui_MainWindow(DisplayImgComp):
         self.Component2ComboBox2.setCursor(
             QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.Component2ComboBox2.setObjectName("Component2ComboBox2")
-        self.Component2ComboBox2.addItem("")
-        self.Component2ComboBox2.addItem("")
-        self.Component2ComboBox2.addItem("")
-        self.Component2ComboBox2.addItem("")
-        self.Component2ComboBox2.addItem("")
-        self.Component2ComboBox2.addItem("")
+        self.Component2ComboBox2.addItem(components.imaginary)
+        # self.Component2ComboBox2.setCurrentText(components.imaginary)
         self.gridLayout_2.addWidget(self.Component2ComboBox2, 4, 1, 1, 3)
         self.gridLayout_5.addWidget(self.MixerGroupBox, 0, 1, 1, 1)
         #################################
@@ -222,16 +235,14 @@ class Ui_MainWindow(DisplayImgComp):
         self.Image2ViewerA = QtWidgets.QLabel(self.Img2Groupbox)
         self.Image2ViewerA.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.Image2ViewerA.setObjectName("Image2ViewerA")
+        self.Image2ViewerA.setMinimumSize(100,100)
         self.gridLayout_3.addWidget(self.Image2ViewerA, 1, 0, 1, 1)
-        # Display Img 2
-        pixmap_img2 = QtGui.QPixmap(self.paths[1])
-        pixmap_img2 = pixmap_img2.scaled(355, 300, QtCore.Qt.KeepAspectRatio)
-        self.Image2ViewerA.setPixmap(pixmap_img2)
         #---------------------------------------------------------------
         ########################################################
         self.Image2ViewerB = QtWidgets.QLabel(self.Img2Groupbox)
         self.Image2ViewerB.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.Image2ViewerB.setObjectName("Image2ViewerB")
+        self.Image2ViewerB.setMinimumSize(100,100)
         self.gridLayout_3.addWidget(self.Image2ViewerB, 1, 1, 1, 1)
         self.gridLayout_5.addWidget(self.Img2Groupbox, 1, 0, 1, 1)
         self.OutputGroupBox = QtWidgets.QGroupBox(self.centralwidget)
@@ -245,11 +256,13 @@ class Ui_MainWindow(DisplayImgComp):
         self.viewer1 = QtWidgets.QLabel(self.OutputGroupBox)
         self.viewer1.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.viewer1.setObjectName("viewer1")
-        self.viewer1.resize(50,50)
+        self.viewer1.setMinimumSize(100,100)
+        # self.viewer1.resize(50,30)
         self.gridLayout_4.addWidget(self.viewer1, 0, 0, 1, 1)
         self.viewer2 = QtWidgets.QLabel(self.OutputGroupBox)
         self.viewer2.setStyleSheet("background-color: rgb(0, 0, 0);")
         self.viewer2.setObjectName("viewer2")
+        self.viewer2.setMinimumSize(100,100)
         self.gridLayout_4.addWidget(self.viewer2, 0, 1, 1, 1)
         self.gridLayout_5.addWidget(self.OutputGroupBox, 1, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -266,6 +279,15 @@ class Ui_MainWindow(DisplayImgComp):
         self.progressBar.hide()
         self.gridLayout_2.addWidget(self.progressBar,5,1,1,3)
         # window = window.windowType()
+
+        # tool bar
+        self.toolBar = QtWidgets.QToolBar(MainWindow)
+        self.toolBar.setObjectName("toolBar")
+        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
+        
+        self.new_images_action = newAction(MainWindow,os.path.realpath("../images/folder.png"),"new_images_action",method_to_trigger=self.new_images)
+        self.toolBar.addAction(self.new_images_action)
+
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         
@@ -284,7 +306,12 @@ class Ui_MainWindow(DisplayImgComp):
             lambda: self.valuechange_Component1ComboBox2(2))
 
         self.Component1ComboBox1.currentIndexChanged.connect(self.mix)
+        self.Component2ComboBox1.currentIndexChanged.connect(self.mix)
         self.OutputCombobox.currentIndexChanged.connect(self.mix)
+
+        self.centralwidget.hide()
+
+        logging.info('Ui has been generated')
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -306,12 +333,12 @@ class Ui_MainWindow(DisplayImgComp):
             0, _translate("MainWindow", "Image 1"))
         self.Component1ComboBox1.setItemText(
             1, _translate("MainWindow", "Image 2"))
-        self.Component1ComboBox2.setItemText(
-            0, _translate("MainWindow", components.magnitude))
-        self.Component1ComboBox2.setItemText(1,
-                                             _translate("MainWindow", components.phase))
-        self.Component1ComboBox2.setItemText(2,
+        self.Component1ComboBox2.setItemText(0,
                                              _translate("MainWindow", components.real))
+        self.Component1ComboBox2.setItemText(
+            1, _translate("MainWindow", components.magnitude))
+        self.Component1ComboBox2.setItemText(2,
+                                             _translate("MainWindow", components.phase))
         self.Component1ComboBox2.setItemText(
             3, _translate("MainWindow", components.imaginary))
         self.Component1ComboBox2.setItemText(
@@ -326,18 +353,19 @@ class Ui_MainWindow(DisplayImgComp):
             0, _translate("MainWindow", "Image 1"))
         self.Component2ComboBox1.setItemText(
             1, _translate("MainWindow", "Image 2"))
-        self.Component2ComboBox2.setItemText(
-            0, _translate("MainWindow", components.magnitude))
-        self.Component2ComboBox2.setItemText(1,
-                                             _translate("MainWindow", components.phase))
-        self.Component2ComboBox2.setItemText(2,
-                                             _translate("MainWindow", components.real))
-        self.Component2ComboBox2.setItemText(
-            3, _translate("MainWindow", components.imaginary))
-        self.Component2ComboBox2.setItemText(
-            4, _translate("MainWindow", components.uniform_magnitude))
-        self.Component2ComboBox2.setItemText(
-            5, _translate("MainWindow", components.uniform_phase))
+        # self.Component2ComboBox2.setItemText(
+        #     0, _translate("MainWindow", components.imaginary))
+        # self.Component2ComboBox2.setCurrentIndex(0)
+        # self.Component2ComboBox2.setItemText(1,
+        #                                      _translate("MainWindow", components.phase))
+        # self.Component2ComboBox2.setItemText(2,
+        #                                      _translate("MainWindow", components.real))
+        # self.Component2ComboBox2.setItemText(
+        #     3, _translate("MainWindow", components.imaginary))
+        # self.Component2ComboBox2.setItemText(
+        #     4, _translate("MainWindow", components.uniform_magnitude))
+        # self.Component2ComboBox2.setItemText(
+        #     5, _translate("MainWindow", components.uniform_phase))
         #########################
 
         self.Component1SliderEnd.setText(_translate("MainWindow", "0%"))
@@ -365,7 +393,6 @@ class Ui_MainWindow(DisplayImgComp):
             self.Update_img2Component)
         #####################################################
         self.Component2ComboBox1.setCurrentIndex(1)
-        self.Component2ComboBox2.setCurrentIndex(1)
 
     def Update_img1Component(self, component_indx):
         self.Update_img_componentV2(component_indx, "img1")
@@ -375,7 +402,7 @@ class Ui_MainWindow(DisplayImgComp):
 
     def Update_img_component(self, component_indx, var):
         pixmap_img1_comp = QtGui.QPixmap(self.paths[2])
-        pixmap_img1_comp = pixmap_img1_comp.scaled(355, 300,
+        pixmap_img1_comp = pixmap_img1_comp.scaled(355, 200,
                                                    QtCore.Qt.KeepAspectRatio)
 
         if component_indx == 0:  # magnitude
@@ -412,10 +439,10 @@ class Ui_MainWindow(DisplayImgComp):
             self.get_img_imgnary(img + 1)
         # new to this function
         pixmap_img1_comp = QtGui.QPixmap(self.paths[2])
-        pixmap_img1_comp = pixmap_img1_comp.scaled(355, 300,
+        pixmap_img1_comp = pixmap_img1_comp.scaled(self.Image1ViewerB.width(), self.Image1ViewerB.height(),
                                                    QtCore.Qt.KeepAspectRatio)
         pixmap_img2_comp = QtGui.QPixmap(self.paths[3])
-        pixmap_img2_comp = pixmap_img2_comp.scaled(355, 300,
+        pixmap_img2_comp = pixmap_img2_comp.scaled(self.Image2ViewerB.width(), self.Image2ViewerB.height(),
                                                    QtCore.Qt.KeepAspectRatio)
 
         viewers = [self.Image1ViewerB, self.Image2ViewerB]
@@ -437,17 +464,23 @@ class Ui_MainWindow(DisplayImgComp):
         self.mix()
 
     def valuechange_Component1ComboBox2(self, num_combox):
-        # if num_combox == 1:
-        if self.Component1ComboBox2.currentText() == components.real or self.Component2ComboBox2.currentText() == components.imaginary :
-            self.Component2ComboBox2.setCurrentText(components.opposite(self.Component1ComboBox2.currentText()))
-        else :
-            pass
-    # else:
-        if self.Component2ComboBox2.currentText() == components.real or self.Component2ComboBox2.currentText() == components.imaginary :
-            self.Component1ComboBox2.setCurrentText(components.opposite(self.Component2ComboBox2.currentText()))
+        if num_combox == 1 : 
+            self.Component2ComboBox2.clear()
+            if self.Component1ComboBox2.currentText() == components.real :
+                self.Component2ComboBox2.addItem(components.imaginary)
+
+            if self.Component1ComboBox2.currentText() == components.imaginary : 
+                self.Component2ComboBox2.addItem(components.real)
+
+            if self.Component1ComboBox2.currentText() == components.magnitude or self.Component1ComboBox2.currentText() == components.uniform_magnitude : 
+                self.Component2ComboBox2.addItems([components.phase,components.uniform_phase])
+
+            if self.Component1ComboBox2.currentText() == components.phase or self.Component1ComboBox2.currentText() == components.uniform_phase : 
+                self.Component2ComboBox2.addItems([components.magnitude,components.uniform_magnitude])
+            self.mix()
         else : 
-            pass
-        self.mix()
+            if self.Component2ComboBox2.currentText() : 
+                self.mix()
     def mix(self) : 
         # prgress bar setup
         self.progressBar.setValue(0)
@@ -490,20 +523,80 @@ class Ui_MainWindow(DisplayImgComp):
     def updateProgressBar(self,count) : 
         self.progressBar.setValue(count)
 
-    def resizeWindow(self,ev) : 
+    def resizeWindow(self,ev = None) : 
         if(self.viewer1.pixmap()) :
             self.viewer1.setPixmap(QtGui.QPixmap(os.path.realpath("../images/Output1.png")).scaled(self.viewer1.width(),self.viewer1.height(),QtCore.Qt.IgnoreAspectRatio))
         if(self.viewer2.pixmap()) :
             self.viewer2.setPixmap(QtGui.QPixmap(os.path.realpath("../images/Output2.png")).scaled(self.viewer2.width(),self.viewer2.height(),QtCore.Qt.IgnoreAspectRatio))
+        if(self.Image1ViewerA.pixmap()) :
+            self.Image1ViewerA.setPixmap(QtGui.QPixmap(self.paths[0]).scaled(self.Image1ViewerA.width(),self.Image1ViewerA.height(),QtCore.Qt.IgnoreAspectRatio))
+        if(self.Image2ViewerA.pixmap()) : 
+            self.Image2ViewerA.setPixmap(QtGui.QPixmap(self.paths[1]).scaled(self.Image2ViewerA.width(),self.Image2ViewerA.height(),QtCore.Qt.IgnoreAspectRatio))
+        if(self.Image1ViewerB.pixmap()) : 
+            self.Image1ViewerB.setPixmap(QtGui.QPixmap(self.paths[2]).scaled(self.Image1ViewerB.width(),self.Image1ViewerB.height(),QtCore.Qt.IgnoreAspectRatio))
+        if(self.Image2ViewerB.pixmap()) : 
+            self.Image2ViewerB.setPixmap(QtGui.QPixmap(self.paths[3]).scaled(self.Image2ViewerB.width(),self.Image2ViewerB.height(),QtCore.Qt.IgnoreAspectRatio))
             
 
+
+
+
+            
+    def new_images(self) :
+        logging.info('open new images dialog has been opened')
+        dialog = QtWidgets.QFileDialog()
+        dialog.setFileMode(QtWidgets.QFileDialog.AnyFile)
+        directory = dialog.getOpenFileNames(None,'select images', __file__,"image files(*.png *.jpg *.jpeg)")
+        fileNames = directory[0]
+        # check that the user choosed 2 images
+        if len(fileNames)  != 2 : 
+            self.warnDialog("please choose 2 images")
+            logging.error("the user has not choosed 2 images")
+            return 
+        image_1 = fileNames[0]
+        image_2 = fileNames[1]
+        logging.info('images has been loaded')
+        # check the size of the tw2 images
+        # try : 
+        mixer = Mixer(image_1,image_2)
+        logging.info('mixer Object has been started')
+        if not mixer.is_the_same_size() : 
+            self.warnDialog("please check that your images have tha same size")
+            logging.critical('user inserted 2 images not having the same size')
+            return
+        # start mixing and displaying the images components
+        self.paths[0] = image_1
+        self.paths[1] = image_2
+        logging.info('images has the same size and has been prepared to show')
+        image_arr1=mpimg.imread(self.paths[0])
+        image_arr2=mpimg.imread(self.paths[1])
+        self.img_arrays = [image_arr1,image_arr2]
+        logging.info('making initial mix')
+        self.mix()
+        logging.info('initial mix Done ...')
+        self.Image1ViewerA.setPixmap(QtGui.QPixmap(image_1).scaled(self.Image1ViewerA.width(),self.Image1ViewerA.height(),QtCore.Qt.IgnoreAspectRatio))
+        self.Image2ViewerA.setPixmap(QtGui.QPixmap(image_2).scaled(self.Image2ViewerA.width(),self.Image2ViewerA.height(),QtCore.Qt.IgnoreAspectRatio))
+        #update components
+        self.Update_img_componentV2(0, "img1")
+        self.Update_img_componentV2(0, "img2")
+        # show widgets
+        self.centralwidget.show()
+        #resize labels
+        self.resizeWindow()
+        MainWindow.setGeometry(80,80,100,200)
+        # except : 
+        #     self.warnDialog("somthing rong with your pictures please try again !")
+
+    def warnDialog(self,message):
+        window = QtWidgets.QMessageBox()
+        window.setWindowTitle("error")
+        window.setText(message)
+        window.exec_()
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = main_window()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    ui.Update_img_componentV2(0, "img1")
-    ui.Update_img_componentV2(0, "img2")
     MainWindow.show()
     sys.exit(app.exec_())
