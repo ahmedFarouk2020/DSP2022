@@ -10,7 +10,9 @@ import os
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import os
+import logging
 
+logger = logging.getLogger('Show Images Component') 
 
 class PromptError():
     def error_message(self, message):
@@ -46,123 +48,46 @@ class DisplayImgComp(PromptError):
 
 
     def get_img_magnitude(self, img_number=1):
-
         # get arrays of images
         image_arr = self.img_arrays[img_number - 1]
         complex_arr = fft2(image_arr)
         #shift the signal to origin
         shifted_complex = fftshift(complex_arr)
-
-        # get magnitude of np complex array
-        #magnitude = np.log(np.abs(shifted_sig))
-        magnitude = abs(shifted_complex)
-        # img_arr = ifft2(magnitude)
-        # img_arr = [x.real for x in img_arr]
-        #print(img_arr)
-        #max_magnitude = np.amax(magnitude)
-        # divid max value in array by all elements in the array ()
-        #img_comp_mag = np.true_divide(magnitude,max_magnitude)
-        #print(img_comp_mag)
-        # img_arr = np.int32(img_arr)
+        magnitude = np.abs(shifted_complex)
         plt.imshow(magnitude)
         plt.axis('off')
         plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
-        #mpimg.imsave(self.paths[img_number + 1], img_arr)
 
     def get_img_reals(self, img_number=1):
-
         # get arrays of images
         image_arr = self.img_arrays[img_number - 1]
         complex_arr = fft2(image_arr)
         shifted_complex = fftshift(complex_arr)
         reals = np.real(shifted_complex)
-        # reals = [x.real for x in complex_arr]
-        # img_arr = ifft2(reals)
-        # remove the imaginary part form final img array
-        # img_arr = [x.real for x in img_arr]
-        #print(img_arr)
-        #print(reals)
-        #png.from_array(reals,mode="L").save("C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png")
-        # max_magnitude = np.amax(magnitude)
-        # img_comp_mag = np.true_divide(magnitude,max_magnitude)
-        # #print(img_comp_mag)
-        # img_arr = np.int32(img_arr)
         plt.imshow(reals)
         plt.axis('off')
         plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
-        #mpimg.imsave(self.paths[img_number + 1], img_arr)
 
     def get_img_imgnary(self, img_number=1):
-
         # get arrays of images
         image_arr = self.img_arrays[img_number - 1]
         complex_arr = fft2(image_arr)
         shifted_complex = fftshift(complex_arr)
         shifted_complex = np.imag(shifted_complex)
-        # imagnary = np.array(imagnary) + 0j
-        # imagnary = np.array(imagnary) * 1j
-        # img_arr = ifft2(imagnary)
-        # get magnitude of array element to remove very small real numbers
-        # img_arr = [x.real for x in img_arr]
-        #print(img_arr)
-        #print(imagnary)
-        #png.from_array(reals,mode="L").save("C:/Users/Farouk/Desktop/projects_VsCode/GUI/img1comp.png")
-        # max_magnitude = np.amax(magnitude)
-        # img_comp_mag = np.true_divide(magnitude,max_magnitude)
-        # #print(img_comp_mag)
-        # img_arr = np.int32(img_arr)
         plt.imshow(shifted_complex)
         plt.axis('off')
         plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
-        #mpimg.imsave(self.paths[img_number + 1], img_arr)
 
     def get_img_phase(self, img_number=1):
-
         # get an array of image
         image_arr = self.img_arrays[img_number - 1]
-
         complex_arr = fft2(image_arr)
         shifted_complex = fftshift(complex_arr)
         # get phase component
         phase_spectrumA = np.angle(shifted_complex)
-        #self.save_in_file(phase_spectrumA)
-
-        #magnitude_spectrumB = 20*np.log(np.abs(fshift1)) ****************************
-
-        # img_arr = ifft2(phase_spectrumA)
-        # print(image_arr)
-        #remove complex part
-        # img_arr = [x.real for x in img_arr]
-        # img_arr = np.int32(img_arr)
         plt.imshow(phase_spectrumA)
         plt.axis('off')
         plt.savefig(self.paths[img_number + 1],bbox_inches='tight')
-        #mpimg.imsave(self.paths[img_number + 1], img_arr)
-
-        # imgplot = plt.imshow(img_arr)
-        # plt.show()
-        # imgplot = plt.imshow(self.image_arr2)
-        # plt.show()
 
 
 
-###########################################################
-# the below functions are for debugging (not used in the code)
-############################################################
-
-    def remove_file(path):
-        os.remove(path)
-
-    def save_in_file(array):
-        fileHandle = open("img array.txt", "w")
-        fileHandle.write(str(array))
-        fileHandle.close()
-
-    def sav_img(self):
-        lum_img = image_arr[:, :, 0]
-        imgplot = plt.imshow(lum_img)
-        imgplot.set_cmap('hot')
-        mpimg.imsave(self.path3, lum_img)
-
-# ob = DisplayImgComp()
-# ob.get_img_phase()

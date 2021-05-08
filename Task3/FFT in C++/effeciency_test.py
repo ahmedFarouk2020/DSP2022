@@ -7,7 +7,7 @@ import numpy as np
 class efficiencyTest():
     def __init__(self, real_input,real_output,img_output):
         # configure DFT library
-        DFT = ctypes.cdll.LoadLibrary(r'C:\Users\Farouk\Desktop\chocolatey\DFT_pointer.so')
+        DFT = ctypes.cdll.LoadLibrary(r'C:\DSP2022\Task3\FFT in C++\DFT_pointer.so')
         DFT.dft2.restype = None
         DFT.dft2.argtypes = [ndpointer(ctypes.c_double, flags="C_CONTIGUOUS"),
                             ctypes.c_double,
@@ -15,7 +15,7 @@ class efficiencyTest():
                             ndpointer(ctypes.c_double, flags="C_CONTIGUOUS")]
         self.dft = DFT.dft2
         # configure FFT library
-        FFT = ctypes.cdll.LoadLibrary(r'C:\Users\Farouk\Desktop\chocolatey\FFTS.so')
+        FFT = ctypes.cdll.LoadLibrary(r'C:\DSP2022\Task3\FFT in C++\FFT.cpp')
         FFT.fft.restype = None
         FFT.fft.argtypes = [   ctypes.c_double,
                                 ndpointer(ctypes.c_double, flags="C_CONTIGUOUS"),
@@ -52,7 +52,6 @@ class efficiencyTest():
         return self.elapsedTime
 
     def getErrorArray(self,FFTout,DFTout):
-        
         z = list(zip(FFTout,DFTout))
         self.error = [x-y for x,y in z]
         return self.error
