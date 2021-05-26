@@ -1,11 +1,9 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QWidget,QMessageBox,QMainWindow
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5 import QtCore
-import sys
 from numpy.fft import fft2, ifft2, fftshift
 from numpy import abs
 import numpy as np
-import png
 import os
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
@@ -14,15 +12,7 @@ import logging
 
 logger = logging.getLogger('Show Images Component') 
 
-class PromptError():
-    def error_message(self, message):
-        window = QMessageBox()
-        window.setWindowTitle("ERROR")
-        window.setText(message)
-        window.exec_()
-
-
-class DisplayImgComp(PromptError):
+class DisplayImgComp():
     def __init__(self):
         #resize method 
         self.resizeMethod = None

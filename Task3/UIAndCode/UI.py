@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from display_imgAndcomp import DisplayImgComp,PromptError
+from display_imgAndcomp import DisplayImgComp
 from Mixer import Mixer
 import Components as components
 import matplotlib.pyplot as plt
@@ -353,19 +353,6 @@ class Ui_MainWindow(DisplayImgComp):
             0, _translate("MainWindow", "Image 1"))
         self.Component2ComboBox1.setItemText(
             1, _translate("MainWindow", "Image 2"))
-        # self.Component2ComboBox2.setItemText(
-        #     0, _translate("MainWindow", components.imaginary))
-        # self.Component2ComboBox2.setCurrentIndex(0)
-        # self.Component2ComboBox2.setItemText(1,
-        #                                      _translate("MainWindow", components.phase))
-        # self.Component2ComboBox2.setItemText(2,
-        #                                      _translate("MainWindow", components.real))
-        # self.Component2ComboBox2.setItemText(
-        #     3, _translate("MainWindow", components.imaginary))
-        # self.Component2ComboBox2.setItemText(
-        #     4, _translate("MainWindow", components.uniform_magnitude))
-        # self.Component2ComboBox2.setItemText(
-        #     5, _translate("MainWindow", components.uniform_phase))
         #########################
 
         self.Component1SliderEnd.setText(_translate("MainWindow", "0%"))
@@ -400,26 +387,6 @@ class Ui_MainWindow(DisplayImgComp):
     def Update_img2Component(self, component_indx):
         self.Update_img_componentV2(component_indx, "img2")
 
-    def Update_img_component(self, component_indx, var):
-        pixmap_img1_comp = QtGui.QPixmap(self.paths[2])
-        pixmap_img1_comp = pixmap_img1_comp.scaled(355, 200,
-                                                   QtCore.Qt.KeepAspectRatio)
-
-        if component_indx == 0:  # magnitude
-            self.get_img_magnitude()
-            self.Image1ViewerB.setPixmap(pixmap_img1_comp)
-            self.Image1ViewerB.show()
-
-        elif component_indx == 1:  # phase
-            pass
-        elif component_indx == 2:  # reals
-            self.get_img_reals()
-            self.Image1ViewerB.setPixmap(pixmap_img1_comp)
-            self.Image1ViewerB.show()
-        elif component_indx == 3:  # imaginary
-            self.get_img_imgnary()
-            self.Image1ViewerB.setPixmap(pixmap_img1_comp)
-            self.Image1ViewerB.show()
 
     def Update_img_componentV2(self, component_indx, which_img):
 
@@ -584,14 +551,13 @@ class Ui_MainWindow(DisplayImgComp):
         #resize labels
         self.resizeWindow()
         MainWindow.setGeometry(80,80,100,200)
-        # except : 
-        #     self.warnDialog("somthing rong with your pictures please try again !")
 
     def warnDialog(self,message):
         window = QtWidgets.QMessageBox()
         window.setWindowTitle("error")
         window.setText(message)
         window.exec_()
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
