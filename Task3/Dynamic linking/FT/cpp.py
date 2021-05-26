@@ -9,7 +9,7 @@ import os
 class efficiencyTest():
     def __init__(self, real_input,real_output,img_output):
         # configure DFT library
-        DFT = ctypes.cdll.LoadLibrary(os.path.realpath('../GUI/Dynamic linking/FT/shared_lib/DFT_FFT2.so'))
+        DFT = ctypes.cdll.LoadLibrary(os.path.realpath('../Dynamic linking/FT/shared_lib/DFT_FFT2.so'))
         DFT.dft.restype = None
         DFT.dft.argtypes = [ ctypes.c_double,
                              ndpointer(ctypes.c_double, flags="C_CONTIGUOUS"),
@@ -17,7 +17,7 @@ class efficiencyTest():
                              ndpointer(ctypes.c_double, flags="C_CONTIGUOUS")]
         self.dft = DFT.dft
         # configure FFT library
-        FFT = ctypes.cdll.LoadLibrary(os.path.realpath('../GUI/Dynamic linking/FT/shared_lib/DFT_FFT2.so'))
+        FFT = ctypes.cdll.LoadLibrary(os.path.realpath('../Dynamic linking/FT/shared_lib/DFT_FFT2.so'))
         FFT.fft.restype = None
         FFT.fft.argtypes = [   ctypes.c_double,
                                 ndpointer(ctypes.c_double, flags="C_CONTIGUOUS"),
