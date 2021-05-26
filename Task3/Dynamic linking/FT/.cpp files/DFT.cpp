@@ -19,19 +19,10 @@ extern "C"
 
 void dft2(double* real_input, int N, double* real_out,double* img_out)
 {
-    // container to store complex result
-    // vector<double> real_output(0);
-    // vector<double> complex_output(0);
 
     // real, imaginary part of k-th complex element
     double real = 0;
     double imgn = 0;
-
-    // temperary variable to combine real, imaginary pairs inside
-    //Complex temp = 0;
-
-    // number of elements in array
-    // int N = real_input.size();
 
     double phase, sine, cosine;
 
