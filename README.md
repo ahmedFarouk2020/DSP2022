@@ -1,5 +1,10 @@
-# DSP2022 projects
+# Image Mixer & Dynamic linking
 ___
 
-## Link to second Task desktop application : [Task2](https://drive.google.com/file/d/1hmXEilmYI0t0GarLW0F90MknueinqcVn/view?usp=sharing)
-#####   No install needed just download the zip file, unzip it and open the SigV.exe and the program will run. Task3 app will be added soon.
+## Image Mixer
+Manipulate Images like:
+* Transform it to frequency domain using FT.
+* Cut off sum of the image and add it to another image.
+
+## Dynamic Linking
+Used to call C function (inside binary C file) from python script for efficiency purposes.

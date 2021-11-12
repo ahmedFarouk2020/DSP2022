@@ -278,14 +278,13 @@ class Ui_MainWindow(DisplayImgComp):
         self.progressBar.setMaximum(100)
         self.progressBar.hide()
         self.gridLayout_2.addWidget(self.progressBar,5,1,1,3)
-        # window = window.windowType()
 
         # tool bar
         self.toolBar = QtWidgets.QToolBar(MainWindow)
         self.toolBar.setObjectName("toolBar")
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
         
-        self.new_images_action = newAction(MainWindow,os.path.realpath("../images/folder.png"),"new_images_action",method_to_trigger=self.new_images)
+        self.new_images_action = newAction(MainWindow,os.path.realpath("../GUI/DSP2022/Task3/images/folder.png"),"new_images_action",method_to_trigger=self.new_images)
         self.toolBar.addAction(self.new_images_action)
 
         self.retranslateUi(MainWindow)
@@ -480,7 +479,7 @@ class Ui_MainWindow(DisplayImgComp):
         data_after_Mixing = mixer.mix_with_the_opposite(component_1,mixingRatio_1,component_2,mixingRatio_2)
         plt.imshow(data_after_Mixing)
         plt.axis('off')
-        pth = '../images/Output' + str(self.OutputCombobox.currentIndex() + 1) + '.png'
+        pth = '../GUI/DSP2022/Task3/images/Output' + str(self.OutputCombobox.currentIndex() + 1) + '.png'
         plt.savefig(os.path.realpath(pth),bbox_inches='tight')
         output_image = QtGui.QPixmap(os.path.realpath(pth))
         viewer.setPixmap(output_image.scaled(viewer.width(),viewer.height(),QtCore.Qt.IgnoreAspectRatio))
@@ -492,9 +491,9 @@ class Ui_MainWindow(DisplayImgComp):
 
     def resizeWindow(self,ev = None) : 
         if(self.viewer1.pixmap()) :
-            self.viewer1.setPixmap(QtGui.QPixmap(os.path.realpath("../images/Output1.png")).scaled(self.viewer1.width(),self.viewer1.height(),QtCore.Qt.IgnoreAspectRatio))
+            self.viewer1.setPixmap(QtGui.QPixmap(os.path.realpath("../GUI/DSP2022/Task3/images/Output1.png")).scaled(self.viewer1.width(),self.viewer1.height(),QtCore.Qt.IgnoreAspectRatio))
         if(self.viewer2.pixmap()) :
-            self.viewer2.setPixmap(QtGui.QPixmap(os.path.realpath("../images/Output2.png")).scaled(self.viewer2.width(),self.viewer2.height(),QtCore.Qt.IgnoreAspectRatio))
+            self.viewer2.setPixmap(QtGui.QPixmap(os.path.realpath("../GUI/DSP2022/Task3/images/Output2.png")).scaled(self.viewer2.width(),self.viewer2.height(),QtCore.Qt.IgnoreAspectRatio))
         if(self.Image1ViewerA.pixmap()) :
             self.Image1ViewerA.setPixmap(QtGui.QPixmap(self.paths[0]).scaled(self.Image1ViewerA.width(),self.Image1ViewerA.height(),QtCore.Qt.IgnoreAspectRatio))
         if(self.Image2ViewerA.pixmap()) : 

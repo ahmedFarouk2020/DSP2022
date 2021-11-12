@@ -9,7 +9,7 @@ import os
 class efficiencyTest():
     def __init__(self, real_input,real_output,img_output):
         # configure DFT library
-        DFT = ctypes.cdll.LoadLibrary(os.path.realpath('../Dynamic linking/FT/shared_lib/DFT_FFT2.so'))
+        DFT = ctypes.cdll.LoadLibrary(os.path.realpath('../GUI/DSP2022/Task3/Dynamic linking/FT/shared_lib/DFT_FFT2.so'))
         DFT.dft.restype = None
         DFT.dft.argtypes = [ ctypes.c_double,
                              ndpointer(ctypes.c_double, flags="C_CONTIGUOUS"),
@@ -17,7 +17,7 @@ class efficiencyTest():
                              ndpointer(ctypes.c_double, flags="C_CONTIGUOUS")]
         self.dft = DFT.dft
         # configure FFT library
-        FFT = ctypes.cdll.LoadLibrary(os.path.realpath('../Dynamic linking/FT/shared_lib/DFT_FFT2.so'))
+        FFT = ctypes.cdll.LoadLibrary(os.path.realpath('../GUI/DSP2022/Task3/Dynamic linking/FT/shared_lib/DFT_FFT2.so'))
         FFT.fft.restype = None
         FFT.fft.argtypes = [   ctypes.c_double,
                                 ndpointer(ctypes.c_double, flags="C_CONTIGUOUS"),
@@ -49,7 +49,8 @@ class efficiencyTest():
         
 
     def startTimer(self):
-        start = time.time() * 1000000
+        
+        start = time.time() * 1000000 # in micro seconds
         return start
 
     def getElapsedTime(self, start):
@@ -61,18 +62,6 @@ class efficiencyTest():
         error = [np.abs(np.square(np.subtract(x,y)).mean()) for x,y in z]
         return error
 
-    def drawErrorPlot(self):
-        # the x axis (0 -> max index in error array)
-        x = range(0,len(self.error),1)
-        # the y axis (values of elements array)
-        y = [x.real for x in self.error]
-        
-        plt.ylim((-2,6))
-
-        plt.xlabel("N-values")
-        plt.ylabel("Error")
-        plt.plot(x,y)
-        plt.show()
     @staticmethod
     def drawPlot(N_values=None,ERROR_FLAG=1,error=None,y_axis1=None,y_axis2=None,xlabel="",
                     ylabel="",legend1="", legend2=""):

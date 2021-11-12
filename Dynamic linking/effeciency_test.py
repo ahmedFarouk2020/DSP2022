@@ -27,13 +27,13 @@ for x in N_values:
 
     a.change_input(input_,real_output,img_output)
 
-    # get dft time array
+    # fill dft time array
     startDFT = a.startTimer()
     DFT1_out = a.DFT1()
     dft_time = a.getElapsedTime(startDFT)
     DFT_time.append(dft_time)
 
-    #get fft time array
+    # fill fft time array
     start1 = a.startTimer()
     FFT1_out = a.FFT1()
     fft_time = a.getElapsedTime(start1)

@@ -1,5 +1,0 @@
-<RCC>
-  <qresource prefix="newPrefix">
-    <file>eq.png</file>
-  </qresource>
-</RCC>
